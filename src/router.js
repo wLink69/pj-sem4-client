@@ -7,6 +7,12 @@ import Car from './views/Car.vue'
 import Flight from './views/Flight.vue'
 import Contact from './views/Contact.vue'
 import About from './views/About.vue'
+import Login from './views/Login.vue'
+
+import Admin from './views/admin/Admin.vue'
+import Dashboard from './views/admin/Dashboard.vue'
+import Create from './views/admin/Create.vue'
+import List from './views/admin/List.vue'
 
 Vue.use(Router)
 
@@ -48,6 +54,30 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: About
-    }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: Admin,
+      children: [
+        {
+          path: 'dashboard',
+          component: Dashboard,
+        },
+        {
+          path: 'create',
+          component: Create,
+        },
+        {
+          path: 'list',
+          component: List,
+        }
+      ]
+    },
   ]
 });
