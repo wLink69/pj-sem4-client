@@ -1,5 +1,5 @@
 <template>
-  	<div class="admin">
+  	<div class="admin pr-4">
 		  <div class="left-sidebar">
 			  	<div class="left-sidebar-top">
 					<span><img src="/favicon.ico" alt=""></span>
@@ -40,10 +40,8 @@
 </template>
 
 <style lang="less" scoped>
-	.dashboard, .admin-create {
-		padding-left: 80px;
-	}
 	.admin {
+		padding-left: 90px;
 		margin-top: 40px;
 		.left-sidebar {
 			z-index: 99;
@@ -94,11 +92,44 @@
 
 <script>
    export default{
-       created: function(){
-		   var url = new URL(window.location).pathname;
-			if (url == '/admin') {
-				this.$router.push("/admin/dashboard");
-			}	
+	   data: function() {
+		return {
+			role: '',
+			config: {
+				headers: {
+					Authorization: '',
+				}
+			},
 		}
-   }
+	   },
+       created: function(){
+			if (this.token) {
+				this.config.headers.Authorization = 'Bearer ' + this.token;
+				axios.get(this.baseUrl + '/api/user', this.config)
+				.then((response) => {
+					if (response.data.data.authorities[0].authority == 'ROLE_USER' && response.data.data.authorities.length == 1) {
+						this.role = 'user'
+					} else {
+						this.role = 'admin'
+					}
+				})
+				.catch((error) => {
+					this.role = 'user'
+				})
+				.finally(() => {
+					if (this.role != 'admin') {
+						location.href = "/";
+					} else {
+						var url = new URL(window.location).pathname;
+						if (url == '/admin') {
+							this.$router.push("/admin/dashboard");
+						}	
+					}
+				});
+			}
+			else {
+			   location.href = "/";
+			}
+		}
+	}
 </script>

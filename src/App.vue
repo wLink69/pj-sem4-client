@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <div class="link-nav pl-1">
+    <div v-if="role == 'admin'" class="link-nav pl-3 pr-3">
       <img src="/lol.ico" width="30px" height="30px" alt="">
       <a class="nav-link" href="/">My site <i class="fas fa-home"></i></a>
       <a class="nav-link" href="/admin">My admin <i class="fas fa-users-cog"></i></a>
-      <span>Inspired by wLink</span>
+      <a v-on:click="logout" class="log-out" href="javascript:void(0)"><i class="fas fa-sign-out-alt"></i>Logout</a>
     </div>
-    <div v-if="currentPage!='admin'" id="nav">
-      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div v-if="currentPage!='admin'" id="nav" v-bind:class="{ 'has-token': role == 'admin' }">
+      <nav v-bind:class="{ 'has-token': role == 'admin' }" class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
           <a class="navbar-brand" href="/">dirEngine.</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +17,8 @@
           <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
               <li v-for="(value, key) in pages" v-bind:key="key" v-bind:class="currentPage==value ? 'active' : ''" class="nav-item"><a v-bind:href="'/'+value" class="nav-link">{{key}}</a></li>
-              <li class="nav-item cta"><a href="/login" class="nav-link"><span><i class="fas fa-sign-in-alt"></i> Login</span></a></li>
+              <li v-if="!token" class="nav-item cta"><a href="/login" class="nav-link"><span><i class="fas fa-sign-in-alt"></i> Login</span></a></li>
+              <li v-if="token" class="nav-item cta"><a href="/" class="nav-link"><span><i class="far fa-user"></i> Account</span></a></li>
             </ul>
           </div>
         </div>
@@ -91,7 +92,7 @@
 </template>
 
 <style lang="less">
-  #nav, .ftco-navbar-light.scrolled.awake {
+  #nav.has-token, .ftco-navbar-light.scrolled.awake.has-token {
     margin-top: 40px;
   }
   .link-nav {
@@ -103,12 +104,12 @@
     a {
       display: inline-block;
       color: #fff;
-    }
-    span {
-      color: #c0c1c5;
-      float: right;
-      padding-top: 8px;
-      padding-right: 15px;
+      &.log-out{
+        color: #c0c1c5;
+        float: right;
+        padding-top: 8px;
+        padding-right: 15px;
+      }
     }
   }
 </style>
@@ -127,11 +128,37 @@ export default {
         Contact: 'contact'
       },
       currentPage: '',
+      role: 'user',
+      config: {
+				headers: {
+					Authorization: '',
+				}
+			},
     }
   },
   created: function() {
     var url = new URL(window.location).pathname;
     this.currentPage = url.split("/")[1];
+    if (this.token) {
+      this.config.headers.Authorization = 'Bearer ' + this.token;
+      axios.get(this.baseUrl + '/api/user', this.config)
+      .then((response) => {
+        if (response.data.data.authorities[0].authority == 'ROLE_USER' && response.data.data.authorities.length == 1) {
+          this.role = 'user';
+        } else {
+          this.role = 'admin'
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+  },
+  methods: {
+    logout: function() {
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      location.href = "/";
+    }
   }
 }
 </script>

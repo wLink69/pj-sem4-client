@@ -8,11 +8,13 @@ import Flight from './views/Flight.vue'
 import Contact from './views/Contact.vue'
 import About from './views/About.vue'
 import Login from './views/Login.vue'
+import NotFound from './views/NotFound.vue'
 
 import Admin from './views/admin/Admin.vue'
 import Dashboard from './views/admin/Dashboard.vue'
 import Create from './views/admin/Create.vue'
 import List from './views/admin/List.vue'
+import Edit from './views/admin/Edit.vue'
 
 Vue.use(Router)
 
@@ -74,10 +76,30 @@ export default new Router({
           component: Create,
         },
         {
+          path: 'create/:id',
+          component: Create,
+        },
+        {
           path: 'list',
           component: List,
+        },
+        {
+          path: 'list/:id',
+          component: List,
+        },
+        {
+          path: 'edit/:id/:edit_id',
+          component: Edit,
+        },
+        {
+          path :'*',
+          component: NotFound
         }
       ]
     },
+    {
+      path :'*',
+      component: NotFound
+    }
   ]
 });

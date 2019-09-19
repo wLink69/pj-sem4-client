@@ -4,6 +4,9 @@
 		  	<div class="overlay"></div>
 		  </div>
 		<h4 class="text-center mt-5">Login</h4>
+		<div class="alert alert-danger mb-3" style="width:40%; margin:auto" v-if="errors.length">
+			<li v-for="(error,index) in errors" v-bind:key="index">{{ error }}</li>
+		</div>
 		<form class="mt-2 mb-5">
 			<div class="form-group">
 				<label for="username">Username</label>
@@ -12,10 +15,6 @@
 			<div class="form-group">
 				<label for="exampleInputPassword1">Password</label>
 				<input v-model="loginData.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-			</div>
-			<div class="form-check text-center">
-				<input type="checkbox" class="form-check-input" id="exampleCheck1">
-				<label class="form-check-label" for="exampleCheck1">Check me out</label>
 			</div>
 			<div class="form-group text-center">
 				<input type="button" v-on:click="login" class="submit-btn btn btn-primary mt-2" value="Submit">
@@ -52,18 +51,27 @@ export default {
 					'Content-Type': 'application/json',
 				}
 			},
+			errors: [],
 		}
 	},
 	methods: {
 		login: function() {
-			axios.post('http://b78cb52b.ngrok.io/auth/login', JSON.stringify(this.loginData), this.config)
-			.then(function (response) {
-				console.log(response);
-				alert('ok')
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
+			if (!this.loginData.username) {
+				this.errors.push('Username required.');
+			}
+			if (!this.loginData.password) {
+				this.errors.push('Password required.');
+			}
+			if (this.loginData.username && this.loginData.password) {
+				axios.post(this.baseUrl + '/auth/login', JSON.stringify(this.loginData), this.config)
+				.then(function (response) {				
+					document.cookie = "token=" + response.data.access_token;
+					location.href = "/";
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			}
 		}
 	}
 }
