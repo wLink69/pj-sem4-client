@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Tour from './views/Tour.vue'
+import TourSingle from './views/TourSingle.vue'
 import Hotel from './views/Hotel.vue'
 import Car from './views/Car.vue'
 import Flight from './views/Flight.vue'
@@ -31,6 +32,11 @@ export default new Router({
       path: '/tour',
       name: 'tour',
       component: Tour
+    },
+    {
+      path: '/tour/:id',
+      name: 'tour-single',
+      component: TourSingle
     },
     {
       path: '/hotel',

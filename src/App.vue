@@ -17,8 +17,8 @@
           <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
               <li v-for="(value, key) in pages" v-bind:key="key" v-bind:class="currentPage==value ? 'active' : ''" class="nav-item"><a v-bind:href="'/'+value" class="nav-link">{{key}}</a></li>
-              <li v-if="!token" class="nav-item cta"><a href="/login" class="nav-link"><span><i class="fas fa-sign-in-alt"></i> Login</span></a></li>
-              <li v-if="token" class="nav-item cta"><a href="/" class="nav-link"><span><i class="far fa-user"></i> Account</span></a></li>
+              <li v-if="!token" class="nav-item cta"><router-link to="/login" class="nav-link"><span><i class="fas fa-sign-in-alt"></i> Login</span></router-link></li>
+              <li v-if="token" class="nav-item cta"><router-link to="/" class="nav-link"><span><i class="far fa-user"></i> Account</span></router-link></li>
             </ul>
           </div>
         </div>

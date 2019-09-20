@@ -56,6 +56,7 @@ export default {
 	},
 	methods: {
 		login: function() {
+			this.errors = [];
 			if (!this.loginData.username) {
 				this.errors.push('Username required.');
 			}
@@ -68,11 +69,17 @@ export default {
 					document.cookie = "token=" + response.data.access_token;
 					location.href = "/";
 				})
-				.catch(function (error) {
-					console.log(error);
+				.catch((error) => {
+					this.errors.push('Incorrect username or password.');
 				});
 			}
 		}
+	},
+	created: function() {
+		var body = document.body; // For Safari
+		var html = document.documentElement; // Chrome, Firefox, IE and Opera 
+		body.scrollTop = 0; 
+		html.scrollTop = 0;
 	}
 }
 </script>

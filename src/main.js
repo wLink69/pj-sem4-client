@@ -7,7 +7,7 @@ Vue.config.productionTip = false
 Vue.mixin({
   data: function() {
     return {
-      baseUrl: 'http://d817fcd9.ngrok.io',
+      baseUrl: 'http://3db3e49a.ngrok.io',
       token: '',
     }
   },
