@@ -94,7 +94,7 @@
 					<div class="row">
 						<div v-for="(tour, index) in tours" v-bind:key="index" class="col-md-4 ftco-animate fadeInUp ftco-animated">
 							<div class="destination">
-								<a href="#" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + tour.image + ')'">
+								<a :href="'/tour/' + tour.id" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + tour.image + ')'">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
 									</div>
@@ -102,7 +102,7 @@
 								<div class="text p-3">
 									<div class="d-flex">
 										<div class="one">
-											<h3><a href="#">{{tour.title}}</a></h3>
+											<h3><a :href="'/tour/' + tour.id">{{tour.title}}</a></h3>
 											<p class="rate">
 												<i class="icon-star"></i>
 												<i class="icon-star"></i>
@@ -117,7 +117,7 @@
 										</div>
 									</div>
 									<p><b>Food serving: </b> {{tour.food}}</p>
-									<p><b>Hotels available: </b> {{tour.food}}</p>
+									<p><b>Hotels related: </b> {{tour.food}}</p>
 									<p><b>Flights available: </b> {{tour.food}}</p>
 									<p class="days"><span>{{tour.duration}}</span></p>
 									<hr>
@@ -133,13 +133,11 @@
 						<div class="col text-center">
 							<div class="block-27">
 							<ul>
-								<li><a href="#">&lt;</a></li>
-								<li class="active"><span>1</span></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&gt;</a></li>
+								<li v-if="page > 0"><a href="javascript:void(0)">&lt;</a></li>
+								<li v-bind:class="{'active' : page==n-1}" v-for="n in totalPages" v-bind:key="n">
+									<a v-on:click="page=n-1" href="javascript:void(0)">{{n}}</a>
+								</li>
+								<li v-if="page < totalPages-1"><a href="javascript:void(0)">&gt;</a></li>
 							</ul>
 							</div>
 						</div>
@@ -189,26 +187,34 @@ export default {
 			location: '',
 			type: '',
 			title: '',
+			priceMin: '',
+			priceMax: '',
+			page: 0,
+			totalPages: '',
+			totalItems: '',
 		}
 	},
 	methods: {
 		doSearch: function() {
-			if (this.location != '') {
-				axios.get(this.baseUrl + '/api/tour/searchByLocation/' + this.location)
-				.then((response) => {
-					console.log(response);
-					this.tours = response.data.data;
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
-			}
+			var location = 'location=' + this.location; 
+			var title = 'title=' + this.title; 
+			axios.get(this.baseUrl + '/api/tour/search-test?page=1&limit=6&' + location + '&' + title)
+			.then((response) => {
+				this.tours = response.data.data;
+				this.totalPages = response.data.pagination.totalPages;
+				this.totalItems = response.data.pagination.totalItems;
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 		}
 	},
 	created: function() {
-		axios.get(this.baseUrl + '/api/tour/getAll')
+		axios.get(this.baseUrl + '/api/tour/getAll?page=0&limit=6')
 		.then((response) => {
 			this.tours = response.data.data;
+			this.totalPages = response.data.pagination.totalPages;
+			this.totalItems = response.data.pagination.totalItems;
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -221,6 +227,34 @@ export default {
 		.catch(function (error) {
 			console.log(error);
 		});
-	}
+	},
+	watch: {
+		page: function() {
+			if (this.location!='' || this.title!= '' || this.priceMin!='' || this.priceMax!='') {
+				var location = 'location=' + this.location;
+				var title = 'title=' + this.title; 
+				axios.get(this.baseUrl + '/api/tour/search-test?page=' + this.page + '&limit=6&' + location + '&' + title)
+				.then((response) => {
+					console.log(response.data);
+					this.tours = response.data.data;
+					this.totalPages = response.data.pagination.totalPages;
+					this.totalItems = response.data.pagination.totalItems;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			} else {
+				axios.get(this.baseUrl + '/api/tour/getAll?page=' + this.page + '&limit=6')
+				.then((response) => {
+					this.tours = response.data.data;
+					this.totalPages = response.data.pagination.totalPages;
+					this.totalItems = response.data.pagination.totalItems;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			}
+		}
+	},
 }
 </script>

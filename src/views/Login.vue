@@ -1,8 +1,6 @@
 <template>
   	<div class="login">
-		  <div class="hero-wrap" style="background-image: url('/log4.jpg'); height: 100px;">
-		  	<div class="overlay"></div>
-		  </div>
+		  <div class="hero-wrap" style="background-image: url('/log4.jpg'); height: 100px;"></div>
 		<h4 class="text-center mt-5">Login</h4>
 		<div class="alert alert-danger mb-3" style="width:40%; margin:auto" v-if="errors.length">
 			<li v-for="(error,index) in errors" v-bind:key="index">{{ error }}</li>
@@ -65,9 +63,9 @@ export default {
 			}
 			if (this.loginData.username && this.loginData.password) {
 				axios.post(this.baseUrl + '/auth/login', JSON.stringify(this.loginData), this.config)
-				.then(function (response) {				
-					document.cookie = "token=" + response.data.access_token;
-					location.href = "/";
+				.then(function (response) {			
+					document.cookie = "token=" + response.data.data.access_token;
+					setTimeout(location.href = "/", 2000);
 				})
 				.catch((error) => {
 					this.errors.push('Incorrect username or password.');
@@ -76,6 +74,9 @@ export default {
 		}
 	},
 	created: function() {
+		if (this.token) {
+			location.href = "/";
+		}
 		var body = document.body; // For Safari
 		var html = document.documentElement; // Chrome, Firefox, IE and Opera 
 		body.scrollTop = 0; 

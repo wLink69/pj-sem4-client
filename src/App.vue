@@ -92,8 +92,11 @@
 </template>
 
 <style lang="less">
-  #nav.has-token, .ftco-navbar-light.scrolled.awake.has-token {
+  #nav.has-token, .ftco-navbar-light.has-token {
     margin-top: 40px;
+  }
+  .ftco-navbar-light.scrolled.awake.has-token {
+    top: 36px;
   }
   .link-nav {
     position: fixed;

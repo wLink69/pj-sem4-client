@@ -7301,6 +7301,7 @@ h1, h2, h3, h4, h5,
 .ftco-navbar-light {
   background: transparent !important;
   position: absolute;
+  top: 20px;
   left: 0;
   right: 0;
   z-index: 3; }
@@ -7454,7 +7455,7 @@ h1, h2, h3, h4, h5,
   position: inherit; }
   .hero-wrap .overlay {
     position: absolute;
-    top: 40;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -8090,11 +8091,7 @@ h1, h2, h3, h4, h5,
   background: #fff !important;
   color: #000000 !important;
   font-size: 18px;
-  border-radius: 0px;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important; }
-  .form-control:focus, .form-control:active {
-    border-color: #000000; }
+}
 
 textarea.form-control {
   height: inherit !important; }

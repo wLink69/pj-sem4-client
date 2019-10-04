@@ -1,41 +1,41 @@
 <template>
   	<div class="admin pr-4">
-		  <div class="left-sidebar">
-			  	<div class="left-sidebar-top">
-					<span><img src="/favicon.ico" alt=""></span>
-					<a href="javascript:void(0)"><i class="fas fa-bars"></i></a>	  
-				</div>
-				<ul class="nav flex-column">
-					<router-link
-						to="/admin/dashboard"
-						v-slot="{ href, navigate, isActive }"
-					>
-						<li :class="[isActive && 'active']" class="nav-item">
-							<a class="nav-link" :href="href" @click="navigate">Dashboard 
-								<i class="fas fa-tachometer-alt"></i></a>
-						</li>
-					</router-link>
-					<router-link
-						to="/admin/create"
-						v-slot="{ href, navigate, isActive }"
-					>
-						<li :class="[isActive && 'active']" class="nav-item">
-							<a class="nav-link" :href="href" @click="navigate">Create 
-								<i class="fas fa-folder-plus"></i></a>
-						</li>
-					</router-link>
-					<router-link
-						to="/admin/list"
-						v-slot="{ href, navigate, isActive }"
-					>
-						<li :class="[isActive && 'active']" class="nav-item">
-							<a class="nav-link" :href="href" @click="navigate">List 
-								<i class="fas fa-list"></i></a>
-						</li>
-					</router-link>
-				</ul>
-		  </div>
-		  <router-view/>	
+		<div class="left-sidebar">
+			<div class="left-sidebar-top">
+				<span><img src="/favicon.ico" alt=""></span>
+				<a href="javascript:void(0)"><i class="fas fa-bars"></i></a>	  
+			</div>
+			<ul class="nav flex-column">
+				<router-link
+					to="/admin/dashboard"
+					v-slot="{ href, navigate, isActive }"
+				>
+					<li :class="[isActive && 'active']" class="nav-item">
+						<a class="nav-link" :href="href" @click="navigate">Dashboard 
+							<i class="fas fa-tachometer-alt"></i></a>
+					</li>
+				</router-link>
+				<router-link
+					to="/admin/create"
+					v-slot="{ href, navigate, isActive }"
+				>
+					<li :class="[isActive && 'active']" class="nav-item">
+						<a class="nav-link" :href="href" @click="navigate">Create 
+							<i class="fas fa-folder-plus"></i></a>
+					</li>
+				</router-link>
+				<router-link
+					to="/admin/list"
+					v-slot="{ href, navigate, isActive }"
+				>
+					<li :class="[isActive && 'active']" class="nav-item">
+						<a class="nav-link" :href="href" @click="navigate">List 
+							<i class="fas fa-list"></i></a>
+					</li>
+				</router-link>
+			</ul>
+		</div>
+		<router-view/>
 	</div>
 </template>
 
@@ -92,17 +92,17 @@
 
 <script>
    export default{
-	   data: function() {
-		return {
-			role: '',
-			config: {
-				headers: {
-					Authorization: '',
-				}
-			},
-		}
-	   },
-       created: function(){
+		data: function() {
+			return {
+				role: '',
+				config: {
+					headers: {
+						Authorization: '',
+					}
+				},
+			}
+		},
+		created: function(){
 			if (this.token) {
 				this.config.headers.Authorization = 'Bearer ' + this.token;
 				axios.get(this.baseUrl + '/api/user', this.config)

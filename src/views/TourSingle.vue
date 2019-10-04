@@ -106,7 +106,7 @@
           			</div>
           		</div>
           		<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-          			<span>Our Best hotels &amp; Rooms</span>
+          			<span>Our Best Tours sponsored by wLink</span>
           			<h2>{{tour.title}}</h2>
           			<p class="rate mb-5">
           				<span class="loc"><a href="#"><i class="icon-map"></i> {{tour.location}}</a></span>
@@ -118,122 +118,74 @@
 							<i class="icon-star-o"></i>
 						8 Rating</span>
 					</p>
-    						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-    						<div class="d-md-flex mt-5 mb-5">
-    							<ul>
-	    							<li>The Big Oxmox advised her not to do so</li>
-	    							<li>When she reached the first hills of the Italic Mountains</li>
-	    							<li>She had a last view back on the skyline of her hometown </li>
-	    							<li>Bookmarksgrove, the headline of Alphabet </li>
-	    						</ul>
-	    						<ul class="ml-md-5">
-	    							<li>Question ran over her cheek, then she continued</li>
-	    							<li>Pityful a rethoric question ran</li>
-	    							<li>Mountains, she had a last view back on the skyline</li>
-	    							<li>Headline of Alphabet Village and the subline</li>
-	    						</ul>
-    						</div>
-    						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+					<div v-html="tour.arrangements"></div>
           		</div>
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-          			<h4 class="mb-4">Take A Tour</h4>
-          			<div class="block-16">
-		              <figure>
-		                <img src="images/hotel-6.jpg" alt="Image placeholder" class="img-fluid">
-		                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>
-		              </figure>
-		            </div>
-          		</div>
-          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-          			<h4 class="mb-4">Our Rooms</h4>
+          			<h4 class="mb-4">Hotels Related</h4>
           			<div class="row">
-          				<div class="col-md-4">
-				    				<div class="destination">
-				    					<a href="hotel-single.html" class="img img-2" style="background-image: url(images/room-4.jpg);"></a>
-				    					<div class="text p-3">
-				    						<div class="d-flex">
-				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star-o"></i>
-						    							<span>8 Rating</span>
-						    						</p>
-					    						</div>
-					    						<div class="two">
-					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
-				    						</div>
-				    						<p>Far far away, behind the word mountains, far from the countries</p>
-				    						<hr>
-				    						<p class="bottom-area d-flex">
-				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
-				    					</div>
-				    				</div>
-				    			</div>
-				    			<div class="col-md-4">
-				    				<div class="destination">
-				    					<a href="hotel-single.html" class="img img-2" style="background-image: url(images/room-5.jpg);"></a>
-				    					<div class="text p-3">
-				    						<div class="d-flex">
-				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star-o"></i>
-						    							<span>8 Rating</span>
-						    						</p>
-					    						</div>
-					    						<div class="two">
-					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
-				    						</div>
-				    						<p>Far far away, behind the word mountains, far from the countries</p>
-				    						<hr>
-				    						<p class="bottom-area d-flex">
-				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
-				    					</div>
-				    				</div>
-				    			</div>
-				    			<div class="col-md-4">
-				    				<div class="destination">
-				    					<a href="hotel-single.html" class="img img-2" style="background-image: url(/images/room-6.jpg);"></a>
-				    					<div class="text p-3">
-				    						<div class="d-flex">
-				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star-o"></i>
-						    							<span>8 Rating</span>
-						    						</p>
-					    						</div>
-					    						<div class="two">
-					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
-				    						</div>
-				    						<p>Far far away, behind the word mountains, far from the countries</p>
-				    						<hr>
-				    						<p class="bottom-area d-flex">
-				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
-				    					</div>
-				    				</div>
-				    			</div>
+          				<div v-for="(h,index) in tour.hotels" v-bind:key="index" class="col-md-4">
+							<div class="destination">
+								<a href="#" class="img img-2" v-bind:style="'background-image: url(' + h.image +')'"></a>
+								<div class="text p-3">
+									<div class="d-flex">
+										<div class="one">
+											<h3><a href="#">{{h.name}}</a></h3>
+											<p class="rate">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<span>8 Rating</span>
+											</p>
+										</div>
+										<div class="two">
+											<span class="price per-price">${{h.price}}</span>
+										</div>
+									</div>
+									<div class="ellipsis" v-html="h.service"></div>
+									<hr>
+									<p class="bottom-area d-flex">
+										<span><i class="icon-map-o"></i> Miami, Fl</span> 
+										<span class="ml-auto"><a href="#">Book Now</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
+          			</div>
+          		</div>
+				  <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+          			<h4 class="mb-4">Flights Available</h4>
+          			<div class="row">
+          				<div v-for="(f,index) in tour.flights" v-bind:key="index" class="col-md-4">
+							<div class="destination">
+								<a href="#" class="img img-2" v-bind:style="'background-image: url(' + f.image +')'"></a>
+								<div class="text p-3">
+									<div class="d-flex">
+										<div class="one">
+											<h3><a href="#">{{f.name}}</a></h3>
+											<p class="rate">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<span>8 Rating</span>
+											</p>
+										</div>
+										<div class="two">
+											<span class="price per-price">${{f.price}}</span>
+										</div>
+									</div>
+									<div class="ellipsis" v-html="f.description"></div>
+									<hr>
+									<p class="bottom-area d-flex">
+										<span><i class="fas fa-fighter-jet"></i> {{f.brand}}</span> 
+										<span class="ml-auto"><a href="#">Book Now</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
           			</div>
           		</div>
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
@@ -290,7 +242,7 @@
 			              </div>
 				            <div class="col-md-12">
 				              <div class="form-group">
-				                <input type="submit" value="Check Availability" class="btn btn-primary py-3">
+				                <input v-on:click="bookTour" type="button" value="Book Now" class="btn btn-primary py-3">
 				              </div>
 			              </div>
 		              </div>
@@ -336,95 +288,95 @@
           			</div>
           		</div>
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-5">
-          			<h4 class="mb-4">Related Hotels</h4>
+          			<h4 class="mb-4">Other Tours</h4>
           			<div class="row">
           				<div class="col-md-4">
-				    				<div class="destination">
-				    					<a href="hotel-single.html" class="img img-2" style="background-image: url(/images/hotel-1.jpg);"></a>
-				    					<div class="text p-3">
-				    						<div class="d-flex">
-				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star-o"></i>
-						    							<span>8 Rating</span>
-						    						</p>
-					    						</div>
-					    						<div class="two">
-					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
-				    						</div>
-				    						<p>Far far away, behind the word mountains, far from the countries</p>
-				    						<hr>
-				    						<p class="bottom-area d-flex">
-				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
-				    					</div>
-				    				</div>
-				    			</div>
-				    			<div class="col-md-4">
-				    				<div class="destination">
-				    					<a href="hotel-single.html" class="img img-2" style="background-image: url(/images/hotel-2.jpg);"></a>
-				    					<div class="text p-3">
-				    						<div class="d-flex">
-				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star-o"></i>
-						    							<span>8 Rating</span>
-						    						</p>
-					    						</div>
-					    						<div class="two">
-					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
-				    						</div>
-				    						<p>Far far away, behind the word mountains, far from the countries</p>
-				    						<hr>
-				    						<p class="bottom-area d-flex">
-				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
-				    					</div>
-				    				</div>
-				    			</div>
-				    			<div class="col-md-4">
-				    				<div class="destination">
-				    					<a href="hotel-single.html" class="img img-2" style="background-image: url(/images/hotel-3.jpg);"></a>
-				    					<div class="text p-3">
-				    						<div class="d-flex">
-				    							<div class="one">
-						    						<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-						    						<p class="rate">
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star"></i>
-						    							<i class="icon-star-o"></i>
-						    							<span>8 Rating</span>
-						    						</p>
-					    						</div>
-					    						<div class="two">
-					    							<span class="price per-price">$40<br><small>/night</small></span>
-				    							</div>
-				    						</div>
-				    						<p>Far far away, behind the word mountains, far from the countries</p>
-				    						<hr>
-				    						<p class="bottom-area d-flex">
-				    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-				    							<span class="ml-auto"><a href="#">Book Now</a></span>
-				    						</p>
-				    					</div>
-				    				</div>
-				    			</div>
+							<div class="destination">
+								<a href="hotel-single.html" class="img img-2" style="background-image: url(/images/hotel-1.jpg);"></a>
+								<div class="text p-3">
+									<div class="d-flex">
+										<div class="one">
+											<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
+											<p class="rate">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<span>8 Rating</span>
+											</p>
+										</div>
+										<div class="two">
+											<span class="price per-price">$40<br><small>/night</small></span>
+										</div>
+									</div>
+									<p>Far far away, behind the word mountains, far from the countries</p>
+									<hr>
+									<p class="bottom-area d-flex">
+										<span><i class="icon-map-o"></i> Miami, Fl</span> 
+										<span class="ml-auto"><a href="#">Book Now</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="destination">
+								<a href="hotel-single.html" class="img img-2" style="background-image: url(/images/hotel-2.jpg);"></a>
+								<div class="text p-3">
+									<div class="d-flex">
+										<div class="one">
+											<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
+											<p class="rate">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<span>8 Rating</span>
+											</p>
+										</div>
+										<div class="two">
+											<span class="price per-price">$40<br><small>/night</small></span>
+										</div>
+									</div>
+									<p>Far far away, behind the word mountains, far from the countries</p>
+									<hr>
+									<p class="bottom-area d-flex">
+										<span><i class="icon-map-o"></i> Miami, Fl</span> 
+										<span class="ml-auto"><a href="#">Book Now</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="destination">
+								<a href="hotel-single.html" class="img img-2" style="background-image: url(/images/hotel-3.jpg);"></a>
+								<div class="text p-3">
+									<div class="d-flex">
+										<div class="one">
+											<h3><a href="hotel-single.html">Hotel, Italy</a></h3>
+											<p class="rate">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<span>8 Rating</span>
+											</p>
+										</div>
+										<div class="two">
+											<span class="price per-price">$40<br><small>/night</small></span>
+										</div>
+									</div>
+									<p>Far far away, behind the word mountains, far from the countries</p>
+									<hr>
+									<p class="bottom-area d-flex">
+										<span><i class="icon-map-o"></i> Miami, Fl</span> 
+										<span class="ml-auto"><a href="#">Book Now</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
           			</div>
           		</div>
 
@@ -435,6 +387,13 @@
     </section> <!-- .section -->
 	</div>
 </template>
+
+<style lang="less" scoped>
+	.ellipsis {
+		height: 100px;
+		overflow: hidden;
+	}
+</style>
 
 <script>
 export default {
@@ -448,7 +407,38 @@ export default {
 				location: '',
 				price: '',
 				image: '',
-			}
+				flights: [
+					{
+						name: '',
+						price: '',
+						description: '',
+						image: '',
+						brand: '',
+						schedule: '',
+					}
+				],
+				hotels: [
+					{
+						name: '',
+						price: '',
+						service: '',
+						image: ''
+					}
+				]
+			},
+			order: {
+				tourId: '',
+				groupTypeId: 1
+			},
+			orderId: '',
+			orderToken: '',
+			redirect_url: '',
+			config: {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: '',
+				}
+			},
 		}
 	},
 	created: function() {
@@ -459,6 +449,41 @@ export default {
 		.catch(function (error) {
 			console.log(error);
 		});
-	}	
+	},
+	methods: {
+		bookTour: function() {
+			this.config.headers.Authorization = 'Bearer ' + this.token;
+			this.order.tourId = parseInt(this.$route.params.id);
+			axios.post(this.baseUrl + '/api/orderTour/create', JSON.stringify(this.order), this.config)
+			.then((response) => {
+				this.orderId = response.data.data.id;
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+
+			axios.post(this.baseUrl + '/paypal/make/payment?sum=' + this.tour.price)
+			.then((response) => {
+				this.redirect_url = response.data.redirect_url;
+				this.orderToken = response.data.redirect_url.split("&token=")[1];
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+		}
+	},
+	mounted() {
+		this.$watch(vm => [vm.orderId, vm.orderToken], val => {		
+			if (this.orderId != '' && this.orderToken != '') {
+				axios.get(this.baseUrl + '/api/orderTour/edit/' + this.orderId + '?token=' + this.orderToken)
+				.then((response) => {
+					window.location.href = this.redirect_url;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			}
+		}, {immediate: true}) // run immediately
+	}
 }
 </script>
