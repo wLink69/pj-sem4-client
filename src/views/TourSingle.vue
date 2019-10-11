@@ -462,7 +462,7 @@ export default {
 				console.log(error);
 			});
 
-			axios.post(this.baseUrl + '/paypal/make/payment?sum=' + this.tour.price)
+			axios.post(this.baseUrl + '/paypal/make/payment?sum=' + this.tour.price, [], this.config)
 			.then((response) => {
 				this.redirect_url = response.data.redirect_url;
 				this.orderToken = response.data.redirect_url.split("&token=")[1];
@@ -475,7 +475,7 @@ export default {
 	mounted() {
 		this.$watch(vm => [vm.orderId, vm.orderToken], val => {		
 			if (this.orderId != '' && this.orderToken != '') {
-				axios.get(this.baseUrl + '/api/orderTour/edit/' + this.orderId + '?token=' + this.orderToken)
+				axios.get(this.baseUrl + '/api/orderTour/edit/' + this.orderId + '?token=' + this.orderToken, this.config)
 				.then((response) => {
 					window.location.href = this.redirect_url;
 				})

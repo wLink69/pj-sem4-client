@@ -33,6 +33,15 @@
 							<i class="fas fa-list"></i></a>
 					</li>
 				</router-link>
+				<router-link
+					to="/admin/order"
+					v-slot="{ href, navigate, isActive }"
+				>
+					<li :class="[isActive && 'active']" class="nav-item">
+						<a class="nav-link" :href="href" @click="navigate">Order 
+							<i class="fas fa-history"></i></a>
+					</li>
+				</router-link>
 			</ul>
 		</div>
 		<router-view/>

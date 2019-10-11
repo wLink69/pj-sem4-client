@@ -9,7 +9,7 @@ Vue.use( CKEditor );
 Vue.mixin({
   data: function() {
     return {
-      baseUrl: 'http://1a5dce2a.ngrok.io',
+      baseUrl: 'http://ada7665c.ngrok.io',
       token: '',
     }
   },

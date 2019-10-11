@@ -155,6 +155,17 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
+
+      if (window.location.href.indexOf("?") > -1) {
+        var param = window.location.href.split("?")[1];
+        axios.get(this.baseUrl + '/paypal/complete/payment?' + param, this.config)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
     }
   },
   methods: {

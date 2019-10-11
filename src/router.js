@@ -15,6 +15,7 @@ import Admin from './views/admin/Admin.vue'
 import Dashboard from './views/admin/Dashboard.vue'
 import Create from './views/admin/Create.vue'
 import List from './views/admin/List.vue'
+import Order from './views/admin/Order.vue'
 import Edit from './views/admin/Edit.vue'
 
 Vue.use(Router)
@@ -96,6 +97,10 @@ export default new Router({
         {
           path: 'edit/:id/:edit_id',
           component: Edit,
+        },
+        {
+          path: 'order',
+          component: Order,
         },
         {
           path :'*',
