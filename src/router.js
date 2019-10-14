@@ -9,6 +9,7 @@ import Flight from './views/Flight.vue'
 import Contact from './views/Contact.vue'
 import About from './views/About.vue'
 import Login from './views/Login.vue'
+import Account from './views/Account.vue'
 import NotFound from './views/NotFound.vue'
 
 import Admin from './views/admin/Admin.vue'
@@ -68,6 +69,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component: Account
     },
     {
       path: '/admin',

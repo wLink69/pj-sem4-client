@@ -1,6 +1,6 @@
 <template>
   	<div class="login">
-		  <div class="hero-wrap" style="background-image: url('/log4.jpg'); height: 100px;"></div>
+		<div class="hero-wrap" style="background-image: url('/log4.jpg'); height: 100px;"></div>
 		<h4 class="text-center mt-5">Login</h4>
 		<div class="alert alert-danger mb-3" style="width:40%; margin:auto" v-if="errors.length">
 			<li v-for="(error,index) in errors" v-bind:key="index">{{ error }}</li>

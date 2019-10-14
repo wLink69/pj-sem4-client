@@ -75,7 +75,9 @@
         axios.get(this.baseUrl + '/api/orderTour/success-payment?year=2019', this.config)
         .then((response) => {
           this.tourData = response.data.data;
-          this.fillData();
+          if (this.tourData!=null) {
+            this.fillData();
+          }
         })
         .catch(function (error) {
           console.log(error);
@@ -118,13 +120,13 @@
                 data: [205, 408, 188, 190, 58, 200, 190, 400, 164, 254, 290, 201]
               }
             ]
-          };
-          if (this.tourData!=null) {
-            for (var key in this.tourData) {
-                if (this.tourData.hasOwnProperty(key)) {
-                  this.datacollection.datasets[0].data.push(this.tourData[key]);
-                }
-            }
+          }
+          var totalTour = 0;
+          for (var key in this.tourData) {
+              if (this.tourData.hasOwnProperty(key)) {
+                totalTour += this.tourData[key];
+                this.datacollection.datasets[0].data.push(this.tourData[key]);
+              }
           }
 
           this.dataPie = {
@@ -132,11 +134,13 @@
             datasets: [
               {
                 label: "Incomes percentage",
-                backgroundColor: ["#41B883", "#E46651"],
-                data: [10, 6]
+                backgroundColor: ["#E46651", "#41B883"],
+                data: []
               }
             ]
           }
+          this.dataPie.datasets[0].data.push(totalTour);
+          this.dataPie.datasets[0].data.push(2019);
         },
       }
     };
