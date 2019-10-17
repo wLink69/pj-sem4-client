@@ -84,11 +84,11 @@
           			<div class="row">
           				<div v-for="(h,index) in tour.hotels" v-bind:key="index" class="col-md-4">
 							<div class="destination">
-								<a href="#" class="img img-2" v-bind:style="'background-image: url(' + h.image +')'"></a>
+								<a href="javascript:void(0)" class="img img-2" v-bind:style="'background-image: url(' + h.image +')'"></a>
 								<div class="text p-3">
 									<div class="d-flex">
 										<div class="one">
-											<h3><a href="#">{{h.name}}</a></h3>
+											<h3><a href="javascript:void(0)">{{h.name}}</a></h3>
 											<p class="rate">
 												<i class="icon-star"></i>
 												<i class="icon-star"></i>
@@ -106,7 +106,6 @@
 									<hr>
 									<p class="bottom-area d-flex">
 										<span><i class="icon-map-o"></i> Miami, Fl</span> 
-										<span class="ml-auto"><a href="#">Book Now</a></span>
 									</p>
 								</div>
 							</div>
@@ -118,11 +117,11 @@
           			<div class="row">
           				<div v-for="(f,index) in tour.flights" v-bind:key="index" class="col-md-4">
 							<div class="destination">
-								<a href="#" class="img img-2" v-bind:style="'background-image: url(' + f.image +')'"></a>
+								<a href="javascript:void(0)" class="img img-2" v-bind:style="'background-image: url(' + f.image +')'"></a>
 								<div class="text p-3">
 									<div class="d-flex">
 										<div class="one">
-											<h3><a href="#">{{f.name}}</a></h3>
+											<h3><a href="javascript:void(0)">{{f.name}}</a></h3>
 											<p class="rate">
 												<i class="icon-star"></i>
 												<i class="icon-star"></i>
@@ -140,7 +139,6 @@
 									<hr>
 									<p class="bottom-area d-flex">
 										<span><i class="fas fa-fighter-jet"></i> {{f.brand}}</span> 
-										<span class="ml-auto"><a href="#">Book Now</a></span>
 									</p>
 								</div>
 							</div>

@@ -75,10 +75,7 @@
 					<div class="row">
 						<div v-for="(flight, index) in flights" v-bind:key="index" class="col-md-4 ftco-animate fadeInUp ftco-animated">
 							<div class="destination">
-								<a href="javascript:void(0)" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + flight.image + ')'">
-									<div class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
+								<a href="javascript:void(0)" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + flight.image + ')'">									
 								</a>
 								<div class="text p-3">
 									<div class="d-flex">
@@ -158,7 +155,7 @@ export default {
 			this.priceMin != '' ? priceMin = 'priceMin=' + this.priceMin : priceMin = '';
 			var priceMax;
 			this.priceMax != '' ? priceMax = 'priceMax=' + this.priceMax : priceMax = '';
-			axios.get(this.baseUrl + '/api/tour/search-test?page=1&limit=6&' + location + '&' + title + '&' + priceMin + '&' + priceMax)
+			axios.get(this.baseUrl + '/api/tour/search-test?page=1&limit=6&' + location + '&' + name + '&' + priceMin + '&' + priceMax)
 			.then((response) => {
 				this.flights = response.data.data;
 				this.totalPages = response.data.pagination.totalPages;

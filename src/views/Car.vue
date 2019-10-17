@@ -17,7 +17,7 @@
 			<div class="row">
 				<div class="col-lg-3 sidebar ftco-animate">
 					<div class="sidebar-wrap bg-light ftco-animate">
-						<h3 class="heading mb-4">Find Tour</h3>
+						<h3 class="heading mb-4">Find Car</h3>
 						<form action="#">
 						<div class="fields">
 						<div class="form-group">
@@ -179,7 +179,7 @@ export default {
 			this.priceMax != '' ? priceMax = 'priceMax=' + this.priceMax : priceMax = '';
 			axios.get(this.baseUrl + '/api/car/search-test?page=1&limit=6&' + name + '&' + priceMin + '&' + priceMax)
 			.then((response) => {
-				this.tours = response.data.data;
+				this.cars = response.data.data;
 				this.totalPages = response.data.pagination.totalPages;
 				this.totalItems = response.data.pagination.totalItems;
 			})

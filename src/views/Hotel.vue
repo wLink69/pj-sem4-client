@@ -77,9 +77,6 @@
 						<div v-for="(hotel, index) in hotels" v-bind:key="index" class="col-md-4 ftco-animate fadeInUp ftco-animated">
 							<div class="destination">
 								<a href="javascript:void(0)" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + hotel.image + ')'">
-									<div class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
 								</a>
 								<div class="text p-3">
 									<div class="d-flex">
@@ -156,7 +153,7 @@ export default {
 			this.priceMin != '' ? priceMin = 'priceMin=' + this.priceMin : priceMin = '';
 			var priceMax;
 			this.priceMax != '' ? priceMax = 'priceMax=' + this.priceMax : priceMax = '';
-			axios.get(this.baseUrl + '/api/hotel/search-test?page=1&limit=6&' + location + '&' + title + '&' + priceMin + '&' + priceMax)
+			axios.get(this.baseUrl + '/api/hotel/search-test?page=1&limit=6&' + location + '&' + name + '&' + priceMin + '&' + priceMax)
 			.then((response) => {
 				this.hotels = response.data.data;
 				this.totalPages = response.data.pagination.totalPages;
