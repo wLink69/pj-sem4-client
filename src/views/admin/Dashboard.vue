@@ -83,6 +83,17 @@
           console.log(error);
         });
 
+        axios.get(this.baseUrl + '/api/orderCar/success-payment?year=2019', this.config)
+        .then((response) => {
+          this.carData = response.data.data;
+          if (this.carData!=null) {
+            this.fillData();
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
         axios.get(this.baseUrl + '/api/orderTour/getAll', this.config)
         .then((response) => {
           this.orders = response.data.data;
@@ -117,7 +128,7 @@
               {
                 label: "Car Incomes",
                 backgroundColor: "#A5CC82",
-                data: [205, 408, 188, 190, 58, 200, 190, 400, 164, 254, 290, 201]
+                data: []
               }
             ]
           }
@@ -126,6 +137,14 @@
               if (this.tourData.hasOwnProperty(key)) {
                 totalTour += this.tourData[key];
                 this.datacollection.datasets[0].data.push(this.tourData[key]);
+              }
+          }
+
+          var totalCar = 0;
+          for (var key in this.carData) {
+              if (this.carData.hasOwnProperty(key)) {
+                totalCar += this.carData[key];
+                this.datacollection.datasets[1].data.push(this.carData[key]);
               }
           }
 
@@ -140,7 +159,7 @@
             ]
           }
           this.dataPie.datasets[0].data.push(totalTour);
-          this.dataPie.datasets[0].data.push(2019);
+          this.dataPie.datasets[0].data.push(totalCar);
         },
       }
     };

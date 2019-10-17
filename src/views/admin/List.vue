@@ -23,7 +23,7 @@
 		</thead>
 		<tbody>
 			<tr v-for="(car, index) in cars" v-bind:key="index">
-			<th scope="row">{{index + 1}}</th>
+			<th scope="row">{{!pageLoad ? index + page*5 + 1 : ''}}</th>
 			<td>{{car.name}}</td>
 			<td>{{car.model}}</td>
 			<td>{{car.size}}</td>
@@ -52,7 +52,7 @@
 		</thead>
 		<tbody>
 			<tr v-for="(tour, index) in tours" v-bind:key="index">
-			<th scope="row">{{index + 1}}</th>
+			<th scope="row">{{!pageLoad ? index + page*5 + 1 : ''}}</th>
 			<td>{{tour.title}}</td>
 			<td>{{tour.food}}</td>
 			<td>{{tour.tourTypeName}}</td>
@@ -83,7 +83,7 @@
 		</thead>
 		<tbody>
 			<tr v-for="(flight, index) in flights" v-bind:key="index">
-			<th scope="row">{{index + 1}}</th>
+			<th scope="row">{{!pageLoad ? index + page*5 + 1 : ''}}</th>
 			<td>{{flight.name}}</td>
 			<td>{{flight.brand}}</td>
 			<td style="color:#007bff">{{flight.tourName}}</td>
@@ -106,7 +106,7 @@
 		</thead>
 		<tbody>
 			<tr v-for="(hotel, index) in hotels" v-bind:key="index">
-			<th scope="row">{{index + 1}}</th>
+			<th scope="row">{{!pageLoad ? index + page*5 + 1 : ''}}</th>
 			<td>{{hotel.name}}</td>
 			<td style="color:#007bff">{{hotel.tourName}}</td>
 			<td>{{hotel.price}}</td>
@@ -119,11 +119,11 @@
 			<div class="col text-center">
 				<div class="block-27">
 				<ul>
-					<li v-if="page > 0"><a href="javascript:void(0)">&lt;</a></li>
+					<li v-if="page > 0"><a v-on:click="page=page-1" href="javascript:void(0)">&lt;</a></li>
 					<li v-bind:class="{'active' : page==n-1}" v-for="n in totalPages" v-bind:key="n">
 						<a v-on:click="page=n-1" href="javascript:void(0)">{{n}}</a>
 					</li>
-					<li v-if="page < totalPages-1"><a href="javascript:void(0)">&gt;</a></li>
+					<li v-if="page < totalPages-1"><a v-on:click="page=page+1" href="javascript:void(0)">&gt;</a></li>
 				</ul>
 				</div>
 			</div>
@@ -218,6 +218,7 @@ export default {
 			page: 0,
 			totalPages: '',
 			totalItems: '',
+			pageLoad: false,
 		}
 	},
 	methods: {
@@ -293,11 +294,13 @@ export default {
 			this.init(this.listSelect);
 		},
 		page: function() {
+			this.pageLoad = true;
 			axios.get(this.baseUrl + '/api/' + this.$route.params.id + '/getAll?page=' + this.page, this.config)
 			.then((response) => {
 				this.cars = this.tours = this.flights = this.hotels = response.data.data;
 				this.totalPages = response.data.pagination.totalPages;
 				this.totalItems = response.data.pagination.totalItems;
+				this.pageLoad = false;
 			})
 			.catch(function (error) {
 				console.log(error);

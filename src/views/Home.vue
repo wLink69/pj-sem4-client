@@ -71,88 +71,42 @@
           </div>
         </div>
     		<div class="row">
-    			<div class="col-md-12">
-    				<div class="destination-slider owl-carousel ftco-animate">
-    					<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-1.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">Paris, Italy</a></h3>
-		    						<span class="listing">15 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
-	    				<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-2.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">San Francisco, USA</a></h3>
-		    						<span class="listing">20 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
-	    				<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-3.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">Lodon, UK</a></h3>
-		    						<span class="listing">10 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
-	    				<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-4.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">Lion, Singapore</a></h3>
-		    						<span class="listing">3 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
-	    				<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-5.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">Australia</a></h3>
-		    						<span class="listing">3 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
-	    				<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-6.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">Paris, Italy</a></h3>
-		    						<span class="listing">3 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
-    				</div>
-    			</div>
+    			<div v-for="(tour, index) in tours" v-bind:key="index" class="col-md-3 ftco-animate fadeInUp ftco-animated">
+							<div class="destination">
+								<a :href="'/tour/' + tour.id" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + tour.image + ')'">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
+									</div>
+								</a>
+								<div class="text p-3">
+									<div class="d-flex">
+										<div class="one">
+											<h3><a :href="'/tour/' + tour.id">{{tour.title}}</a></h3>
+											<p class="rate">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<span>8 Rating</span>
+											</p>
+										</div>
+										<div class="two">
+											<span class="price">${{tour.price}}</span>
+										</div>
+									</div>
+									<p><b>Food serving: </b> {{tour.food}}</p>
+									<p><b>Hotels related: </b> {{tour.food}}</p>
+									<p><b>Flights available: </b> {{tour.food}}</p>
+									<p class="days"><span>{{tour.duration}}</span></p>
+									<hr>
+									<p class="bottom-area d-flex">
+										<span><i class="icon-map-o"></i> {{tour.location}}</span> 
+										<span class="ml-auto"><a :href="'/tour/' + tour.id">Discover</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
     		</div>
     	</div>
     </section>
@@ -168,176 +122,42 @@
     	</div>
     	<div class="container-fluid">
     		<div class="row">
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/destination-1.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">Paris, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price">$200</span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<p class="days"><span>2 days 3 nights</span></p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Discover</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/destination-2.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">Paris, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price">$200</span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<p class="days"><span>2 days 3 nights</span></p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Discover</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/destination-3.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">Paris, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price">$200</span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<p class="days"><span>2 days 3 nights</span></p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Discover</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/destination-4.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">Paris, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price">$200</span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<p class="days"><span>2 days 3 nights</span></p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Discover</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/destination-5.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">Paris, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price">$200</span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<p class="days"><span>2 days 3 nights</span></p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Discover</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
+    			<div v-for="(tour, index) in ftours" v-bind:key="index" class="col-md-3 ftco-animate fadeInUp ftco-animated" style="width:20%;max-width:20%">
+							<div class="destination">
+								<a :href="'/tour/' + tour.id" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + tour.image + ')'">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
+									</div>
+								</a>
+								<div class="text p-3">
+									<div class="d-flex">
+										<div class="one">
+											<h3><a :href="'/tour/' + tour.id">{{tour.title}}</a></h3>
+											<p class="rate">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<span>8 Rating</span>
+											</p>
+										</div>
+										<div class="two">
+											<span class="price">${{tour.price}}</span>
+										</div>
+									</div>
+									<p><b>Food serving: </b> {{tour.food}}</p>
+									<p><b>Hotels related: </b> {{tour.food}}</p>
+									<p><b>Flights available: </b> {{tour.food}}</p>
+									<p class="days"><span>{{tour.duration}}</span></p>
+									<hr>
+									<p class="bottom-area d-flex">
+										<span><i class="icon-map-o"></i> {{tour.location}}</span> 
+										<span class="ml-auto"><a :href="'/tour/' + tour.id">Discover</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
     		</div>
     	</div>
     </section>
@@ -397,177 +217,48 @@
 				<div class="row justify-content-start mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate">
           	<span class="subheading">Special Offers</span>
-            <h2 class="mb-4"><strong>Popular</strong> Hotels &amp; Rooms</h2>
+            <h2 class="mb-4"><strong>Popular</strong> Cars</h2>
           </div>
         </div>    		
     	</div>
     	<div class="container-fluid">
     		<div class="row">
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/hotel-1.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">Hotel, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price per-price">$40<br><small>/night</small></span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/hotel-2.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">Hotel, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price per-price">$40<br><small>/night</small></span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/hotel-3.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">Hotel, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price per-price">$40<br><small>/night</small></span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/hotel-4.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">Hotel, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price per-price">$40<br><small>/night</small></span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/hotel-5.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<div class="d-flex">
-    							<div class="one">
-		    						<h3><a href="#">Hotel, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
-	    						</div>
-	    						<div class="two">
-	    							<span class="price per-price">$40<br><small>/night</small></span>
-    							</div>
-    						</div>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
+    			<div v-for="(car, index) in cars" v-bind:key="index" class="col-md-4 ftco-animate fadeInUp ftco-animated" style="max-width:20%">
+							<div class="destination">
+								<a :href="'/car/' + car.id" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + car.image + ')'">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
+									</div>
+								</a>
+								<div class="text p-3">
+									<div class="d-flex">
+										<div class="one">
+											<h3><a :href="'/car/' + car.id">{{car.name}}</a></h3>
+											<p class="rate">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<span>8 Rating</span>
+											</p>
+										</div>
+										<div class="two">
+											<span class="price">${{car.price}}</span>
+										</div>
+									</div>
+									<p><b>Seating: </b> {{car.seatingCapacity}}</p>
+									<p><b>Driver: </b> {{car.driver==1 ? 'available' : 'none'}}</p>
+									<p><b>Air Conditioner: </b> {{car.airConditioner ? 'available' : 'none'}}</p>
+									<p class="days"><span>Size: {{car.size}}</span></p>
+									<hr>
+									<p class="bottom-area d-flex">
+										<span><i class="far fa-check-circle"></i> Qualified</span> 
+										<span class="ml-auto"><a :href="'/car/' + car.id">Book now</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
     		</div>
     	</div>
     </section>
@@ -644,192 +335,47 @@
 				<div class="row justify-content-start mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate">
           	<span class="subheading">Special Offers</span>
-            <h2 class="mb-4"><strong>Popular</strong> Restaurants</h2>
+            <h2 class="mb-4"><strong>Popular</strong> Hotels &amp; Rooms</h2>
           </div>
         </div>    		
     		<div class="row">
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-1.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<h3><a href="#">Luxury Restaurant</a></h3>
-    						<p class="rate">
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star-o"></i>
-    							<span>8 Rating</span>
-    						</p>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Discover</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-2.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<h3><a href="#">Luxury Restaurant</a></h3>
-    						<p class="rate">
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star-o"></i>
-    							<span>8 Rating</span>
-    						</p>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-3.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<h3><a href="#">Luxury Restaurant</a></h3>
-    						<p class="rate">
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star-o"></i>
-    							<span>8 Rating</span>
-    						</p>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-4.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3">
-    						<h3><a href="#">Luxury Restaurant</a></h3>
-    						<p class="rate">
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star"></i>
-    							<i class="icon-star-o"></i>
-    							<span>8 Rating</span>
-    						</p>
-    						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<hr>
-    						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
-    							<span class="ml-auto"><a href="#">Book Now</a></span>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
+    			<div v-for="(hotel, index) in hotels" v-bind:key="index" class="col-md-3 ftco-animate fadeInUp ftco-animated">
+							<div class="destination">
+								<a href="javascript:void(0)" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + hotel.image + ')'">
+									<div class="icon d-flex justify-content-center align-items-center">
+										<span class="icon-search2"></span>
+									</div>
+								</a>
+								<div class="text p-3">
+									<div class="d-flex">
+										<div class="one">
+											<h3><a href="javascript:void(0)">{{hotel.name}}</a></h3>
+											<p class="rate">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<span>8 Rating</span>
+											</p>
+										</div>
+										<div class="two">
+											<span class="price">${{hotel.price}}</span>
+										</div>
+									</div>
+									<p v-html="hotel.service"></p>
+									<hr>
+									<p class="bottom-area d-flex">
+										<span><i class="icon-map-o"></i> {{hotel.tourName}}</span> 
+									</p>
+								</div>
+							</div>
+						</div>
     		</div>
     	</div>
     </section>
-
-    <section class="ftco-section bg-light">
-      <div class="container">
-        <div class="row justify-content-start mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate">
-            <span class="subheading">Recent Blog</span>
-            <h2><strong>Tips</strong> &amp; Articles</h2>
-          </div>
-        </div>
-        <div class="row d-flex">
-          <div class="col-md-3 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
-              </a>
-              <div class="text p-4 d-block">
-              	<span class="tag">Tips, Travel</span>
-                <h3 class="heading mt-3"><a href="#">8 Best homestay in Philippines that you don't miss out</a></h3>
-                <div class="meta mb-3">
-                  <div><a href="#">August 12, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
-              </a>
-              <div class="text p-4">
-              	<span class="tag">Culture</span>
-                <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                <div class="meta mb-3">
-                  <div><a href="#">August 12, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
-              </a>
-              <div class="text p-4">
-              	<span class="tag">Tips, Travel</span>
-                <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                <div class="meta mb-3">
-                  <div><a href="#">August 12, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_4.jpg');">
-              </a>
-              <div class="text p-4">
-              	<span class="tag">Tips, Travel</span>
-                <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                <div class="meta mb-3">
-                  <div><a href="#">August 12, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 		
-		<section class="ftco-section-parallax">
+	<section class="ftco-section-parallax">
       <div class="parallax-img d-flex align-items-center">
         <div class="container">
           <div class="row d-flex justify-content-center">
@@ -853,3 +399,99 @@
     </section>
   </div>
 </template>
+
+<script>
+export default {
+	data: function() {
+		return {
+			tours: [
+				{
+					id: '',
+					title: '',
+					duration: '',
+					food: '',
+					description: '',
+					tourType: '',
+					tourTypeName: '',
+					image: '',
+					hotel: '',
+				}
+			],
+			ftours: [
+				{
+					id: '',
+					title: '',
+					duration: '',
+					food: '',
+					description: '',
+					tourType: '',
+					tourTypeName: '',
+					image: '',
+					hotel: '',
+				}
+			],
+			hotels: [
+				{
+					name: '',
+					price: '',
+					service: '',
+					image: '',
+					tourName: '',
+					tourId: ''
+				}
+			],
+			cars: [
+				{
+					name: '',
+					size: '',
+					seatingCapacity: '',
+					driver: 1,
+					airConditioner: 1,
+					price: '',
+					image: '',
+					model: 1
+				}
+			],
+		}
+	},
+	created: function() {
+		axios.get(this.baseUrl + '/api/orderTour/getFavoriteOrder')
+		.then((response) => {
+			this.ftours = response.data.data;
+			this.totalPages = response.data.pagination.totalPages;
+			this.totalItems = response.data.pagination.totalItems;
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+
+		axios.get(this.baseUrl + '/api/orderCar/getFavoriteOrder')
+		.then((response) => {
+			this.cars = response.data.data;
+			this.totalPages = response.data.pagination.totalPages;
+			this.totalItems = response.data.pagination.totalItems;
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+
+		axios.get(this.baseUrl + '/api/tour/getAll?page=0&limit=4')
+		.then((response) => {
+			this.tours = response.data.data;
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+
+		axios.get(this.baseUrl + '/api/hotel/getAll?page=0&limit=4')
+		.then((response) => {
+			this.hotels = response.data.data;
+			this.totalPages = response.data.pagination.totalPages;
+			this.totalItems = response.data.pagination.totalItems;
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	},
+}
+</script>

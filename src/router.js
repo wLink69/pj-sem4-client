@@ -121,6 +121,10 @@ export default new Router({
           component: Order,
         },
         {
+          path: 'order/:id',
+          component: Order,
+        },
+        {
           path :'*',
           component: NotFound
         }

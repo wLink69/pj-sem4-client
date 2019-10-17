@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <div v-if="role == 'admin'" class="link-nav pl-3 pr-3">
+    <div v-if="ordering"><div class="loader"></div></div>
+    <div v-if="!ordering">
+      <div v-if="role == 'admin'" class="link-nav pl-3 pr-3">
       <img src="/lol.ico" width="30px" height="30px" alt="">
       <a class="nav-link" href="/">My site <i class="fas fa-home"></i></a>
       <a class="nav-link" href="/admin">My admin <i class="fas fa-users-cog"></i></a>
@@ -88,6 +90,7 @@
         </div>
       </div>
     </footer>
+    </div>
   </div>
 </template>
 
@@ -115,6 +118,22 @@
       }
     }
   }
+  .loader {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 </style>
 
 <script>
@@ -130,6 +149,7 @@ export default {
         About: 'about',
         Contact: 'contact'
       },
+      ordering: false,
       currentPage: '',
       role: 'user',
       config: {
@@ -157,10 +177,11 @@ export default {
       });
 
       if (window.location.href.indexOf("?") > -1) {
+        this.ordering = true;
         var param = window.location.href.split("?")[1];
         axios.get(this.baseUrl + '/paypal/complete/payment?' + param, this.config)
         .then((response) => {
-          console.log(response)
+          location.href = "/account"
         })
         .catch(function (error) {
           console.log(error);

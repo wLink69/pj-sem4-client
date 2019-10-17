@@ -4,8 +4,9 @@
 		<h4 class="text-center mt-5 mb-5">My Account</h4>
 		<a href="javascript:void(0)"></a>
 		<div class="acc-wrapper">
-			<button v-on:click="tab=1" class="acc-tab" v-bind:class="{'active' : tab==1}">My Info</button>
-			<button v-on:click="tab=2" class="acc-tab" v-bind:class="{'active' : tab==2}">My Orders</button>
+			<button v-on:click="tab=1" class="acc-tab" v-bind:class="{'active' : tab==1}">Info</button>
+			<button v-on:click="tab=2" class="acc-tab" v-bind:class="{'active' : tab==2}">Tour Orders</button>
+			<button v-on:click="tab=3" class="acc-tab" v-bind:class="{'active' : tab==3}">Car Orders</button>
 			<a v-on:click="logout" class="log-out" href="javascript:void(0)"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			<div v-if="tab==1" class="mt-5 mb-5">
 				<h4 class="mb-3">My Information</h4>
@@ -17,7 +18,7 @@
 				<a href="#" class="edit-pro">Edit Profile</a>
 			</div>
 			<div v-if="tab==2" class="mt-5 mb-5">
-				<h4 class="mb-3">My Order</h4>
+				<h4 class="mb-3">My tour Order</h4>
 				<table class="table table-hover text-center" cellpadding="10">
 				<thead>
 					<tr>
@@ -29,7 +30,7 @@
 					<th scope="col">Date</th>
 					<th scope="col">Price($)</th>
 					<th scope="col">Status</th>
-					<th scope="col">Action</th>
+					<!-- <th scope="col">Action</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -43,7 +44,38 @@
 						<td>{{order.price}}</td>
 						<td v-if="order.status == 0"><span style="color:red">Pending</span></td>
 						<td v-if="order.status == 2"><span style="color:#008a00">Done</span></td>
-						<td><a style="color: #007bff" href="#">Pay</a><span> / </span><a v-on:click="delOrder(order.id)" href="javascript:void(0)">Delete</a></td>
+						<!-- <td><a style="color: #007bff" href="#">Pay</a><span> / </span><a v-on:click="delOrder(order.id)" href="javascript:void(0)">Delete</a></td> -->
+					</tr>
+				</tbody>
+				</table>
+			</div>
+
+			<div v-if="tab==3" class="mt-5 mb-5">
+				<h4 class="mb-3">My car Order</h4>
+				<table class="table table-hover text-center" cellpadding="10">
+				<thead>
+					<tr>
+					<th scope="col">#</th>
+					<th scope="col">Customer Name</th>
+					<th scope="col">Car Name</th>
+					<th scope="col">Season</th>
+					<th scope="col">Date</th>
+					<th scope="col">Price($)</th>
+					<th scope="col">Status</th>
+					<!-- <th scope="col">Action</th> -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(order, index) in carOrder" v-bind:key="index">
+						<th scope="row">{{index + 1}}</th>
+						<td>{{order.userName}}</td>
+						<td>{{order.carName}}</td>
+						<td>{{order.season}}</td>
+						<td>{{new Date(order.date).toLocaleDateString()}}</td>
+						<td>{{order.price}}</td>
+						<td v-if="order.status == 0"><span style="color:red">Pending</span></td>
+						<td v-if="order.status == 2"><span style="color:#008a00">Done</span></td>
+						<!-- <td><a style="color: #007bff" href="#">Pay</a><span> / </span><a v-on:click="delOrder(order.id)" href="javascript:void(0)">Delete</a></td> -->
 					</tr>
 				</tbody>
 				</table>
@@ -119,6 +151,17 @@ export default {
 					price: '',
 					date: ''
 				}
+			],
+			carOrder: [
+				{
+					id: '',
+					userName: '',
+					carName: '',
+					season: '',
+					status: '',
+					price: '',
+					date: ''
+				}
 			]
 		}
 	},
@@ -144,38 +187,46 @@ export default {
 		.catch(function (error) {
 			console.log(error);
 		});
+
+		axios.get(this.baseUrl + '/api/orderCar/getOrderByUser', this.config)
+		.then((response) => {
+			this.carOrder = response.data.data;
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
 	},
 	methods: {
-		delOrder: function(id) {
-			this.$swal.fire({
-				title: 'Are you sure?',
-				text: "You won't be able to revert this!",
-				type: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'Yes, delete it!'
-				}).then((result) => {
-				if (result.value) {
-					this.config.headers.Authorization = 'Bearer ' + this.token;
-					axios.delete(this.baseUrl + '/api/orderTour/delete/' + id, this.config, {data: {dt:''}})
-					.then((response) => {
-						this.$swal.fire(
-							'Deleted!',
-							'Your order has been deleted.',
-							'success'
-						)
-					})
-					.catch((error) => {
-						this.$swal.fire({
-							type: 'error',
-							title: 'Oops...',
-							text: 'Something went wrong!'
-						})
-					});
-				}
-			})
-		},
+		// delOrder: function(id) {
+		// 	this.$swal.fire({
+		// 		title: 'Are you sure?',
+		// 		text: "You won't be able to revert this!",
+		// 		type: 'warning',
+		// 		showCancelButton: true,
+		// 		confirmButtonColor: '#3085d6',
+		// 		cancelButtonColor: '#d33',
+		// 		confirmButtonText: 'Yes, delete it!'
+		// 		}).then((result) => {
+		// 		if (result.value) {
+		// 			this.config.headers.Authorization = 'Bearer ' + this.token;
+		// 			axios.delete(this.baseUrl + '/api/orderTour/delete/' + id, this.config, {data: {dt:''}})
+		// 			.then((response) => {
+		// 				this.$swal.fire(
+		// 					'Deleted!',
+		// 					'Your order has been deleted.',
+		// 					'success'
+		// 				)
+		// 			})
+		// 			.catch((error) => {
+		// 				this.$swal.fire({
+		// 					type: 'error',
+		// 					title: 'Oops...',
+		// 					text: 'Something went wrong!'
+		// 				})
+		// 			});
+		// 		}
+		// 	})
+		// },
 		logout: function() {
 			document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 			location.href = "/";

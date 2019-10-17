@@ -1,14 +1,18 @@
 <template>
 	<div class="order-list">
-		<h4 class="pt-3 pb-2">Order</h4>
+		<h4 class="pt-3 pb-2 list-title">Order</h4>
+		<select v-model="listSelect" class="list-select">
+			<option value="tour">Tour</option>
+			<option value="car">Car</option>			
+		</select>
 		<table class="table table-hover text-center" cellpadding="10">
 		<thead>
 			<tr>
 			<th scope="col">#</th>
 			<th scope="col">Customer Name</th>
-			<th scope="col">Tour Name</th>
+			<th v-if="listSelect=='tour'" scope="col">Tour Name</th>
+			<th v-if="listSelect=='car'" scope="col">Car Name</th>
 			<th scope="col">Season</th>
-			<th scope="col">Group Type</th>
 			<th scope="col">Status</th>
 			</tr>
 		</thead>
@@ -16,16 +20,16 @@
 			<tr v-for="(order, index) in orders" v-bind:key="index">
 				<th scope="row">{{index + 1}}</th>
 				<td>{{order.userName}}</td>
-				<td>{{order.tourName}}</td>
+				<td v-if="listSelect=='tour'">{{order.tourName}}</td>
+				<td v-if="listSelect=='car'">{{order.carName}}</td>
 				<td>{{order.season}}</td>
-				<td>{{order.groupTypeName}}</td>
 				<td v-if="order.status == 0"><span style="color:red">Pending</span></td>
 				<td v-if="order.status == 2"><span style="color:#008a00">Done</span></td>
 			</tr>
 		</tbody>
 		</table>
 
-		<div class="row mt-5">
+		<!-- <div class="row mt-5">
 			<div class="col text-center">
 				<div class="block-27">
 				<ul>
@@ -37,7 +41,7 @@
 				</ul>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -45,6 +49,13 @@
 	.order-list .table {
 		box-shadow: 1px 1px 10px #dddada;
 		padding: 0 10px;
+	}
+	.list-title {
+    	display: inline-block;
+    	margin-right: 5px;
+	}
+	.list-select {
+		font-size: 16px;
 	}
 </style>
 
@@ -56,7 +67,7 @@ export default {
 				{
 					userName: '',
 					tourName: '',
-					groupTypeName: '',
+					carName: '',
 					season: '',
 					status: ''
 				}
@@ -66,35 +77,64 @@ export default {
 					Authorization: '',
 				}
 			},
+			listSelect: 'tour',
 			page: 0,
 			totalPages: '',
 			totalItems: '',
 		}
 	},
+	methods: {
+		init: function(name) {
+			this.config.headers.Authorization = 'Bearer ' + this.token;
+			if (name=='tour') {
+				axios.get(this.baseUrl + '/api/orderTour/getAll?page=0&limit=50', this.config)
+				.then((response) => {
+					this.orders = response.data.data;
+					// this.totalPages = response.data.pagination.totalPages;
+					// this.totalItems = response.data.pagination.totalItems;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			}
+			if (name=='car') {
+				axios.get(this.baseUrl + '/api/orderCar/getAll?page=0&limit=50', this.config)
+				.then((response) => {
+					console.log(response)
+					this.orders = response.data.data;
+					// this.totalPages = response.data.pagination.totalPages;
+					// this.totalItems = response.data.pagination.totalItems;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			}
+		}
+	},
 	created: function() {
-		this.config.headers.Authorization = 'Bearer ' + this.token;
-		axios.get(this.baseUrl + '/api/orderTour/getAll?page=0&limit=5', this.config)
-		.then((response) => {
-			this.orders = response.data.data;
-			this.totalPages = response.data.pagination.totalPages;
-			this.totalItems = response.data.pagination.totalItems;
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
+		if (this.$route.params.id == undefined) {
+			this.$router.push("/admin/order/tour");
+		} else {
+			this.listSelect = this.$route.params.id;
+		}
+		this.init(this.$route.params.id);
 	},
 	watch: {
-		page: function() {
-			axios.get(this.baseUrl + '/api/orderTour/getAll?page=' + this.page + '&limit=5', this.config)
-			.then((response) => {
-				this.orders = response.data.data;
-				this.totalPages = response.data.pagination.totalPages;
-				this.totalItems = response.data.pagination.totalItems;
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-		}
+		listSelect: function() {
+			this.$router.push("/admin/order/" + this.listSelect).catch(err => {});
+			this.init(this.listSelect);
+		},
+		// page: function() {
+		// 	axios.get(this.baseUrl + '/api/orderTour/getAll?page=' + this.page + '&limit=15', this.config)
+		// 	.then((response) => {
+		// 		this.orders = response.data.data;
+		// 		this.totalPages = response.data.pagination.totalPages;
+		// 		this.totalItems = response.data.pagination.totalItems;
+		// 	})
+		// 	.catch(function (error) {
+		// 		console.log(error);
+		// 	});
+		// }
 	}
 }
 </script>

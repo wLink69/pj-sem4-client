@@ -89,7 +89,7 @@ export default {
 			if (this.registerData.username && this.registerData.password && this.registerData.email && this.validEmail(this.registerData.email)) {
 				axios.post(this.baseUrl + '/api/user', JSON.stringify(this.registerData), this.config)
 				.then((response) => {			
-					console.log(response)
+					location.href = "/login";
 				})
 				.catch((error) => {
 					this.errors.push('Username has been taken.');
