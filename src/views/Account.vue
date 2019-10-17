@@ -193,7 +193,7 @@ export default {
 		}
 	},
 	created: function() {
-		if (this.token) {
+		if (!this.token) {
 			location.href = "/";
 		}
 		var body = document.body; // For Safari
