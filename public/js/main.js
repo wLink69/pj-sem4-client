@@ -338,13 +338,5 @@
   });
 
 
-  $('#checkin_date, #checkout_date').datepicker({
-	  'format': 'm/d/yyyy',
-	  'autoclose': true
-	});
-
-
-
-
 })(jQuery);
 

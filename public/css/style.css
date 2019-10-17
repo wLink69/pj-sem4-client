@@ -9118,7 +9118,6 @@ textarea.form-control {
     bottom: 0; }
   .sidebar-wrap input[type=number] {
     border: 1px solid transparent;
-    text-align: center;
     font-size: 14px;
     -moz-appearance: textfield;
     background: transparent;

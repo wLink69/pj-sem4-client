@@ -208,13 +208,13 @@ export default {
         }
       ],
       car: {
-          name: '',
-          size: '',
-          seatingCapacity: '',
-          driver: 1,
-          airConditioner: 1,
-          price: '',
-          model: 1
+        name: '',
+        size: '',
+        seatingCapacity: '',
+        driver: 1,
+        airConditioner: 1,
+        price: '',
+        model: 1
       },
       tourTypes: [
         {

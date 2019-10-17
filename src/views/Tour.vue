@@ -19,34 +19,27 @@
 					<div class="sidebar-wrap bg-light ftco-animate">
 						<h3 class="heading mb-4">Find Tour</h3>
 						<form action="#">
-							<div class="fields">
+						<div class="fields">
+						<div class="form-group">
+							<input v-model="title" type="text" class="form-control" placeholder="Tour name">
+						</div>
 						<div class="form-group">
 							<input v-model="location" type="text" class="form-control" placeholder="Destination, City">
 						</div>
 						<div class="form-group">
 							<div class="select-wrap one-third">
 								<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-								<select name="" id="" class="form-control" placeholder="Keyword search">
+								<select v-model="tourType" name="" id="" class="form-control" placeholder="Keyword search">
 									<option selected disabled value="">Select TourType</option>
 									<option v-for="(type, index) in tourTypes" v-bind:key="index" :value="type.id">{{type.name}}</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="text" id="checkin_date" class="form-control" placeholder="Date from">
+							<input v-model="priceMin" type="number" class="form-control" placeholder="Price from">
 						</div>
 						<div class="form-group">
-							<input type="text" id="checkin_date" class="form-control" placeholder="Date to">
-						</div>
-						<div class="form-group">
-							<div class="range-slider">
-								<span>
-									<input type="number" value="25000" min="0" max="120000"/>	-
-									<input type="number" value="50000" min="0" max="120000"/>
-								</span>
-								<input value="1000" min="0" max="120000" step="500" type="range"/>
-								<input value="50000" min="0" max="120000" step="500" type="range"/>
-							</div>
+							<input v-model="priceMax" type="number" class="form-control" placeholder="Price to">
 						</div>
 						<div class="form-group">
 							<input v-on:click="doSearch" type="button" value="Search" class="btn btn-primary py-3 px-5">
@@ -185,7 +178,7 @@ export default {
 				}
 			],
 			location: '',
-			type: '',
+			tourType: '',
 			title: '',
 			priceMin: '',
 			priceMax: '',
@@ -197,8 +190,12 @@ export default {
 	methods: {
 		doSearch: function() {
 			var location = 'location=' + this.location; 
-			var title = 'title=' + this.title; 
-			axios.get(this.baseUrl + '/api/tour/search-test?page=1&limit=6&' + location + '&' + title)
+			var title = 'title=' + this.title;
+			var priceMin;
+			this.priceMin != '' ? priceMin = 'priceMin=' + this.priceMin : priceMin = '';
+			var priceMax;
+			this.priceMax != '' ? priceMax = 'priceMax=' + this.priceMax : priceMax = '';
+			axios.get(this.baseUrl + '/api/tour/search-test?page=1&limit=6&' + location + '&' + title + '&' + priceMin + '&' + priceMax)
 			.then((response) => {
 				this.tours = response.data.data;
 				this.totalPages = response.data.pagination.totalPages;
@@ -232,10 +229,21 @@ export default {
 		page: function() {
 			if (this.location!='' || this.title!= '' || this.priceMin!='' || this.priceMax!='') {
 				var location = 'location=' + this.location;
-				var title = 'title=' + this.title; 
-				axios.get(this.baseUrl + '/api/tour/search-test?page=' + this.page + '&limit=6&' + location + '&' + title)
+				var title = 'title=' + this.title;
+				var priceMin = 'priceMin=' + this.priceMin;
+				var priceMax = 'priceMax=' + this.priceMax;
+				axios.get(this.baseUrl + '/api/tour/search-test?page=' + this.page + '&limit=6&' + location + '&' + title  + '&' + priceMin + '&' + priceMax)
 				.then((response) => {
-					console.log(response.data);
+					this.tours = response.data.data;
+					this.totalPages = response.data.pagination.totalPages;
+					this.totalItems = response.data.pagination.totalItems;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			} else if (this.tourType!='') {
+				axios.get(this.baseUrl + '/api/tour/tourType/' + this.tourType + '?page=' + this.page + '&limit=6')
+				.then((response) => {
 					this.tours = response.data.data;
 					this.totalPages = response.data.pagination.totalPages;
 					this.totalItems = response.data.pagination.totalItems;
@@ -254,6 +262,19 @@ export default {
 					console.log(error);
 				});
 			}
+		},
+
+		tourType: function() {
+			axios.get(this.baseUrl + '/api/tour/tourType/' + this.tourType + '?page=0&limit=6')
+			.then((response) => {
+				console.log(response);
+				this.tours = response.data.data;
+				this.totalPages = response.data.pagination.totalPages;
+				this.totalItems = response.data.pagination.totalItems;
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 		}
 	},
 }

@@ -18,6 +18,7 @@
 				<input type="button" v-on:click="login" class="submit-btn btn btn-primary mt-2" value="Submit">
 			</div>
 		</form>
+		<h6 class="text-center mb-5">Don't have an account? <router-link to="/register">Register</router-link></h6>
 	</div>
 </template>
 
