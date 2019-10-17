@@ -267,7 +267,6 @@ export default {
 		tourType: function() {
 			axios.get(this.baseUrl + '/api/tour/tourType/' + this.tourType + '?page=0&limit=6')
 			.then((response) => {
-				console.log(response);
 				this.tours = response.data.data;
 				this.totalPages = response.data.pagination.totalPages;
 				this.totalItems = response.data.pagination.totalItems;

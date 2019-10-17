@@ -157,6 +157,7 @@ export default {
 				confirmButtonText: 'Yes, delete it!'
 				}).then((result) => {
 				if (result.value) {
+					this.config.headers.Authorization = 'Bearer ' + this.token;
 					axios.delete(this.baseUrl + '/api/orderTour/delete/' + id, this.config, {data: {dt:''}})
 					.then((response) => {
 						this.$swal.fire(

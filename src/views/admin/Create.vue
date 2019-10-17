@@ -8,29 +8,33 @@
       <option value="flight">Flight</option>
     </select>
     <!-- car -->
-		<form v-if="$route.params.id == 'car'" class="create-form">
+		<form @submit="createCar" v-if="$route.params.id == 'car'" class="create-form">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="name">Name</label>
-          <input v-model="car.name" type="text" class="form-control" id="name" placeholder="Name">
+          <input v-model="car.name" type="text" class="form-control" id="name" placeholder="Name" required>
         </div>
         <div class="form-group col-md-6">
           <label for="price">Price ($)</label>
-          <input v-model="car.price" type="number" class="form-control" id="price" placeholder="Price">
+          <input v-model="car.price" type="number" class="form-control" id="price" placeholder="Price" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
            <label for="size">Size</label>
-          <input v-model="car.size" type="text" class="form-control" id="size" placeholder="Size">
+          <input v-model="car.size" type="text" class="form-control" id="size" placeholder="Size" required>
         </div>
         <div class="form-group col-md-6">
           <label for="seatingCapacity">Seating Capacity</label>
-          <input v-model="car.seatingCapacity" type="text" class="form-control" id="seatingCapacity" placeholder="Seating Capacity">
+          <input v-model="car.seatingCapacity" type="number" class="form-control" id="seatingCapacity" placeholder="Seating Capacity" required>
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
+          <label for="image">Image</label>
+          <input v-model="car.image" type="text" class="form-control" id="image" placeholder="Image" required>
+        </div>
+        <div class="form-group col-md-2">
           <label for="model">Model</label>
           <select v-model="car.model" class="form-control" id="model">
             <option v-for="(model, index) in modelCars" v-bind:key="index" :value="model.id">{{model.name}}</option>
@@ -51,38 +55,38 @@
           </select>
         </div>
       </div>
-      <input style="width: 100px" type="button" v-on:click="createCar" class="btn btn-primary" value="Submit">
+      <input style="width: 100px" type="submit" class="btn btn-primary" value="Submit">
     </form>
     <!-- tour -->
-    <form v-if="$route.params.id == 'tour'" class="create-form">
+    <form @submit="createTour" v-if="$route.params.id == 'tour'" class="create-form">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="title">Title</label>
-          <input v-model="tour.title" type="text" class="form-control" id="title" placeholder="Title">
+          <input v-model="tour.title" type="text" class="form-control" id="title" placeholder="Title" required>
         </div>
         <div class="form-group col-md-6">
           <label for="price">Price ($)</label>
-          <input v-model="tour.price" type="number" class="form-control" id="price" placeholder="Price">
+          <input v-model="tour.price" type="number" class="form-control" id="price" placeholder="Price" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="localTravel">Local Travel</label>
-          <input v-model="tour.location" type="text" class="form-control" id="localTravel" placeholder="Local travel">
+          <input v-model="tour.location" type="text" class="form-control" id="localTravel" placeholder="Local travel" required>
         </div>
         <div class="form-group col-md-6">
           <label for="food">Food</label>
-          <input v-model="tour.food" type="text" class="form-control" id="food" placeholder="Food">
+          <input v-model="tour.food" type="text" class="form-control" id="food" placeholder="Food" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-5">
            <label for="image">Image</label>
-          <input v-model="tour.image" type="text" class="form-control" id="image" placeholder="Image">
+          <input v-model="tour.image" type="text" class="form-control" id="image" placeholder="Image" required>
         </div>
         <div class="form-group col-md-4">
            <label for="duration">Duration</label>
-          <input v-model="tour.duration" type="text" class="form-control" id="duration" placeholder="Duration">
+          <input v-model="tour.duration" type="text" class="form-control" id="duration" placeholder="Duration" required>
         </div>
         <div class="form-group col-md-3">
           <label for="type">Tour Type</label>
@@ -98,28 +102,28 @@
           <ckeditor :editor="editor" v-model="tour.arrangements"></ckeditor>
         </div>
       </div>
-      <input style="width: 100px" type="button" v-on:click="createTour" class="btn btn-primary" value="Submit">
+      <input style="width: 100px" type="submit" class="btn btn-primary" value="Submit">
     </form>
     <!-- hotel -->
-    <form v-if="$route.params.id == 'hotel'" class="create-form">
+    <form @submit="createHotel" v-if="$route.params.id == 'hotel'" class="create-form">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="name">Name</label>
-          <input v-model="hotel.name" type="text" class="form-control" id="name" placeholder="Name">
+          <input v-model="hotel.name" type="text" class="form-control" id="name" placeholder="Name" required>
         </div>
         <div class="form-group col-md-6">
           <label for="price">Price ($)</label>
-          <input v-model="hotel.price" type="number" class="form-control" id="price" placeholder="Price">
+          <input v-model="hotel.price" type="number" class="form-control" id="price" placeholder="Price" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
            <label for="image">Image</label>
-          <input v-model="hotel.image" type="text" class="form-control" id="image" placeholder="Image">
+          <input v-model="hotel.image" type="text" class="form-control" id="image" placeholder="Image" required>
         </div>
         <div class="form-group col-md-6">
           <label for="tour">Tour</label>
-          <input v-model="hotel.tourId" placeholder="Select a tour" class="form-control" id="tour" list="brow">
+          <input v-model="hotel.tourId" placeholder="Select a tour" class="form-control" id="tour" list="brow" required>
           <datalist id="brow">
             <option v-for="(t,index) in tours" v-bind:key="index" :value="t.id">{{t.title}}</option>
           </datalist>
@@ -131,28 +135,28 @@
           <ckeditor :editor="editor" v-model="hotel.service"></ckeditor>
         </div>
       </div>
-      <input style="width: 100px" type="button" v-on:click="createHotel" class="btn btn-primary" value="Submit">
+      <input style="width: 100px" type="submit" class="btn btn-primary" value="Submit">
     </form>
     <!-- flight -->
-    <form v-if="$route.params.id == 'flight'" class="create-form">
+    <form @submit="createFlight" v-if="$route.params.id == 'flight'" class="create-form">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="name">Name</label>
-          <input v-model="flight.name" type="text" class="form-control" id="name" placeholder="Name">
+          <input v-model="flight.name" type="text" class="form-control" id="name" placeholder="Name" required>
         </div>
         <div class="form-group col-md-6">
           <label for="price">Price ($)</label>
-          <input v-model="flight.price" type="number" class="form-control" id="price" placeholder="Price">
+          <input v-model="flight.price" type="number" class="form-control" id="price" placeholder="Price" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
            <label for="image">Image</label>
-          <input v-model="flight.image" type="text" class="form-control" id="image" placeholder="Image">
+          <input v-model="flight.image" type="text" class="form-control" id="image" placeholder="Image" required>
         </div>
         <div class="form-group col-md-6">
           <label for="tour">Tour</label>
-          <input v-model="flight.tour" placeholder="Select a tour" class="form-control" id="tour" list="brow">
+          <input v-model="flight.tour" placeholder="Select a tour" class="form-control" id="tour" list="brow" required>
           <datalist id="brow">
             <option v-for="(t,index) in tours" v-bind:key="index" :value="t.id">{{t.title}}</option>
           </datalist>  
@@ -161,11 +165,11 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="description">Description</label>
-          <input v-model="flight.description" type="text" class="form-control" id="description" placeholder="Description">
+          <input v-model="flight.description" type="text" class="form-control" id="description" placeholder="Description" required>
         </div>
         <div class="form-group col-md-6">
           <label for="brand">Brand</label>
-          <input v-model="flight.brand" type="text" class="form-control" id="brand" placeholder="Brand">
+          <input v-model="flight.brand" type="text" class="form-control" id="brand" placeholder="Brand" required>
         </div>
       </div>
       <div class="form-row">
@@ -174,7 +178,7 @@
           <ckeditor :editor="editor" v-model="flight.schedule"></ckeditor>
         </div>
       </div>
-      <input style="width: 100px" type="button" v-on:click="createFlight" class="btn btn-primary" value="Submit">
+      <input style="width: 100px" type="submit" class="btn btn-primary" value="Submit">
     </form>
 	</div>
 </template>
@@ -214,6 +218,7 @@ export default {
         driver: 1,
         airConditioner: 1,
         price: '',
+        image: '',
         model: 1
       },
       tourTypes: [
@@ -292,55 +297,97 @@ export default {
     });
   },
   methods: {
-    createCar: function() {
+    createCar: function(e) {
+      e.preventDefault();
       this.car.driver = parseInt(this.car.driver);
       this.car.airConditioner = parseInt(this.car.airConditioner);
       this.config.headers.Authorization = 'Bearer ' + this.token;
       axios.post(this.baseUrl + '/api/car/create', JSON.stringify(this.car), this.config)
-			.then(function (response) {
-        alert('ok');
+			.then((response) => {
+        this.$swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Create successfully!',
+          showConfirmButton: false,
+          timer: 1500
+        })
         document.getElementsByClassName('create-form')[0].reset();
 			})
-			.catch(function (error) {
-        alert('fail');
+			.catch((error) => {
+        this.$swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
 				console.log(error);
 			});
     },
-    createTour: function() {
+    createTour: function(e) {
+      e.preventDefault();
       this.config.headers.Authorization = 'Bearer ' + this.token;
       axios.post(this.baseUrl + '/api/tour/create', JSON.stringify(this.tour), this.config)
-			.then(function (response) {
-        alert('ok');
+			.then((response) => {
+        this.$swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Create successfully!',
+          showConfirmButton: false,
+          timer: 1500
+        })
         document.getElementsByClassName('create-form')[0].reset();
 			})
-			.catch(function (error) {
-        alert('fail');
+			.catch((error) => {
+        this.$swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
 				console.log(error);
 			});
     },
-    createHotel: function() {
+    createHotel: function(e) {
+      e.preventDefault();
       this.config.headers.Authorization = 'Bearer ' + this.token;
-      console.log(this.hotel);
       axios.post(this.baseUrl + '/api/hotel/create', JSON.stringify(this.hotel), this.config)
-			.then(function (response) {
-        alert('ok');
+			.then((response) => {
+        this.$swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Create successfully!',
+          showConfirmButton: false,
+          timer: 1500
+        })
         document.getElementsByClassName('create-form')[0].reset();
 			})
-			.catch(function (error) {
-        alert('fail');
+			.catch((error) => {
+        this.$swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
 				console.log(error);
 			});
     },
-    createFlight: function() {
+    createFlight: function(e) {
+      e.preventDefault();
       this.config.headers.Authorization = 'Bearer ' + this.token;
-      console.log(this.flight);
       axios.post(this.baseUrl + '/api/flight/create', JSON.stringify(this.flight), this.config)
-			.then(function (response) {
-        alert('ok');
+			.then((response) => {
+        this.$swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Create successfully!',
+          showConfirmButton: false,
+          timer: 1500
+        })
         document.getElementsByClassName('create-form')[0].reset();
 			})
-			.catch(function (error) {
-        alert('fail');
+			.catch((error) => {
+        this.$swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
 				console.log(error);
 			});
     }
