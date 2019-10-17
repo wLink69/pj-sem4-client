@@ -90,7 +90,7 @@
         </div>
         <div class="form-group col-md-3">
           <label for="type">Tour Type</label>
-          <select v-model="tour.tourType" class="form-control" id="type">
+          <select v-model="tour.tourType" class="form-control" id="type" required>
             <option disabled selected value="">Choose</option>
             <option v-for="(type, index) in tourTypes" v-bind:key="index" :value="type.id">{{type.name}}</option>
           </select>

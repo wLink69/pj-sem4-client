@@ -109,7 +109,7 @@
 									<p><b>Seating: </b> {{car.seatingCapacity}}</p>
 									<p><b>Driver: </b> {{car.driver==1 ? 'available' : 'none'}}</p>
 									<p><b>Air Conditioner: </b> {{car.airConditioner ? 'available' : 'none'}}</p>
-									<p class="days"><span>{{car.size}}</span></p>
+									<p class="days"><span>Size: {{car.size}}</span></p>
 									<hr>
 									<p class="bottom-area d-flex">
 										<span><i class="far fa-check-circle"></i> Qualified</span> 

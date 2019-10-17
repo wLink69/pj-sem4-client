@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Tour from './views/Tour.vue'
 import TourSingle from './views/TourSingle.vue'
+import CarSingle from './views/CarSingle.vue'
 import Hotel from './views/Hotel.vue'
 import Car from './views/Car.vue'
 import Flight from './views/Flight.vue'
@@ -50,6 +51,11 @@ export default new Router({
       path: '/car',
       name: 'car',
       component: Car
+    },
+    {
+      path: '/car/:id',
+      name: 'car-single',
+      component: CarSingle
     },
     {
       path: '/flight',

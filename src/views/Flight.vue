@@ -5,8 +5,8 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Hotel</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Hotels</h1>
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">Home</a></span> <span>Flight</span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Flight</h1>
           </div>
         </div>
       </div>
@@ -17,23 +17,11 @@
 			<div class="row">
 				<div class="col-lg-3 sidebar ftco-animate">
 					<div class="sidebar-wrap bg-light ftco-animate">
-						<h3 class="heading mb-4">Find Tour</h3>
+						<h3 class="heading mb-4">Find Flight</h3>
 						<form action="#">
 						<div class="fields">
 						<div class="form-group">
-							<input v-model="title" type="text" class="form-control" placeholder="Tour name">
-						</div>
-						<div class="form-group">
-							<input v-model="location" type="text" class="form-control" placeholder="Destination, City">
-						</div>
-						<div class="form-group">
-							<div class="select-wrap one-third">
-								<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-								<select v-model="tourType" name="" id="" class="form-control" placeholder="Keyword search">
-									<option selected disabled value="">Select TourType</option>
-									<option v-for="(type, index) in tourTypes" v-bind:key="index" :value="type.id">{{type.name}}</option>
-								</select>
-							</div>
+							<input v-model="name" type="text" class="form-control" placeholder="Flight name">
 						</div>
 						<div class="form-group">
 							<input v-model="priceMin" type="number" class="form-control" placeholder="Price from">
@@ -85,9 +73,9 @@
 				</div>
 				<div class="col-lg-9">
 					<div class="row">
-						<div v-for="(tour, index) in tours" v-bind:key="index" class="col-md-4 ftco-animate fadeInUp ftco-animated">
+						<div v-for="(flight, index) in flights" v-bind:key="index" class="col-md-4 ftco-animate fadeInUp ftco-animated">
 							<div class="destination">
-								<a :href="'/tour/' + tour.id" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + tour.image + ')'">
+								<a href="javascript:void(0)" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + flight.image + ')'">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
 									</div>
@@ -95,7 +83,7 @@
 								<div class="text p-3">
 									<div class="d-flex">
 										<div class="one">
-											<h3><a :href="'/tour/' + tour.id">{{tour.title}}</a></h3>
+											<h3><a href="javascript:void(0)">{{flight.name}}</a></h3>
 											<p class="rate">
 												<i class="icon-star"></i>
 												<i class="icon-star"></i>
@@ -106,17 +94,14 @@
 											</p>
 										</div>
 										<div class="two">
-											<span class="price">${{tour.price}}</span>
+											<span class="price">${{flight.price}}</span>
 										</div>
 									</div>
-									<p><b>Food serving: </b> {{tour.food}}</p>
-									<p><b>Hotels related: </b> {{tour.food}}</p>
-									<p><b>Flights available: </b> {{tour.food}}</p>
-									<p class="days"><span>{{tour.duration}}</span></p>
+									<p v-html="flight.schedule"></p>
+									<p class="days"><span>{{flight.brand}}</span></p>
 									<hr>
 									<p class="bottom-area d-flex">
-										<span><i class="icon-map-o"></i> {{tour.location}}</span> 
-										<span class="ml-auto"><a :href="'/tour/' + tour.id">Discover</a></span>
+										<span><i class="icon-map-o"></i> {{flight.tourName}}</span> 
 									</p>
 								</div>
 							</div>
@@ -146,24 +131,19 @@
 export default {
 	data: function() {
 		return {
-			flights: {
-				name: '',
-				price: '',
-				description: '',
-				image: '',
-				tour: '',
-				brand: '',
-				schedule: '',
-			},
-			tourTypes: [
+			flights: [
 				{
-					id: '',
-					name: ''
+					name: '',
+					price: '',
+					description: '',
+					image: '',
+					tourName: '',
+					tourId: '',
+					brand: '',
+					schedule: '',
 				}
 			],
-			location: '',
-			tourType: '',
-			title: '',
+			name: '',
 			priceMin: '',
 			priceMax: '',
 			page: 0,
@@ -173,15 +153,14 @@ export default {
 	},
 	methods: {
 		doSearch: function() {
-			var location = 'location=' + this.location; 
-			var title = 'title=' + this.title;
+			var name = "name=" + this.name;
 			var priceMin;
 			this.priceMin != '' ? priceMin = 'priceMin=' + this.priceMin : priceMin = '';
 			var priceMax;
 			this.priceMax != '' ? priceMax = 'priceMax=' + this.priceMax : priceMax = '';
 			axios.get(this.baseUrl + '/api/tour/search-test?page=1&limit=6&' + location + '&' + title + '&' + priceMin + '&' + priceMax)
 			.then((response) => {
-				this.tours = response.data.data;
+				this.flights = response.data.data;
 				this.totalPages = response.data.pagination.totalPages;
 				this.totalItems = response.data.pagination.totalItems;
 			})
@@ -191,19 +170,11 @@ export default {
 		}
 	},
 	created: function() {
-		axios.get(this.baseUrl + '/api/tour/getAll?page=0&limit=6')
+		axios.get(this.baseUrl + '/api/flight/getAll?page=0&limit=6')
 		.then((response) => {
-			this.tours = response.data.data;
+			this.flights = response.data.data;
 			this.totalPages = response.data.pagination.totalPages;
 			this.totalItems = response.data.pagination.totalItems;
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
-
-		axios.get(this.baseUrl + '/api/tourType/getAll')
-		.then((response) => {
-			this.tourTypes = response.data.data;
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -211,24 +182,14 @@ export default {
 	},
 	watch: {
 		page: function() {
-			if (this.location!='' || this.title!= '' || this.priceMin!='' || this.priceMax!='') {
+			if (this.name!= '' || this.priceMin!='' || this.priceMax!='') {
 				var location = 'location=' + this.location;
 				var title = 'title=' + this.title;
 				var priceMin = 'priceMin=' + this.priceMin;
 				var priceMax = 'priceMax=' + this.priceMax;
-				axios.get(this.baseUrl + '/api/tour/search-test?page=' + this.page + '&limit=6&' + location + '&' + title  + '&' + priceMin + '&' + priceMax)
+				axios.get(this.baseUrl + '/api/flight/search-test?page=' + this.page + '&limit=6&' + location + '&' + title  + '&' + priceMin + '&' + priceMax)
 				.then((response) => {
-					this.tours = response.data.data;
-					this.totalPages = response.data.pagination.totalPages;
-					this.totalItems = response.data.pagination.totalItems;
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
-			} else if (this.tourType!='') {
-				axios.get(this.baseUrl + '/api/tour/tourType/' + this.tourType + '?page=' + this.page + '&limit=6')
-				.then((response) => {
-					this.tours = response.data.data;
+					this.flights = response.data.data;
 					this.totalPages = response.data.pagination.totalPages;
 					this.totalItems = response.data.pagination.totalItems;
 				})
@@ -236,9 +197,9 @@ export default {
 					console.log(error);
 				});
 			} else {
-				axios.get(this.baseUrl + '/api/tour/getAll?page=' + this.page + '&limit=6')
+				axios.get(this.baseUrl + '/api/flight/getAll?page=' + this.page + '&limit=6')
 				.then((response) => {
-					this.tours = response.data.data;
+					this.flights = response.data.data;
 					this.totalPages = response.data.pagination.totalPages;
 					this.totalItems = response.data.pagination.totalItems;
 				})
@@ -247,19 +208,6 @@ export default {
 				});
 			}
 		},
-
-		tourType: function() {
-			axios.get(this.baseUrl + '/api/tour/tourType/' + this.tourType + '?page=0&limit=6')
-			.then((response) => {
-				console.log(response);
-				this.tours = response.data.data;
-				this.totalPages = response.data.pagination.totalPages;
-				this.totalItems = response.data.pagination.totalItems;
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-		}
 	},
 }
 </script>

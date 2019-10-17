@@ -217,8 +217,8 @@ export default {
 			},
 			tours: [
 				{
-				id: '',
-				title: ''
+					id: '',
+					title: ''
 				}
 			],
 			hotel: {
@@ -265,6 +265,7 @@ export default {
 				console.log(error);
 			});
 		}
+
 		axios.get(this.baseUrl + '/api/' + this.$route.params.id + '/getOne/' + this.$route.params.edit_id, this.config)
 		.then((response) => {
 			this.car = this.tour = this.flight = this.hotel = response.data.data;
@@ -272,6 +273,11 @@ export default {
 		.catch((error) => {
 			console.log(error)
 		});
+
+		axios.get(this.baseUrl + '/api/tour/getAll-test')
+		.then((response) => {
+			this.tours = response.data.data;
+		})
 	},
 	methods: {
 		editCar: function(e) {
