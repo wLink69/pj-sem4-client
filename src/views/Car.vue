@@ -24,15 +24,6 @@
 							<input v-model="name" type="text" class="form-control" placeholder="Car name">
 						</div>
 						<div class="form-group">
-							<div class="select-wrap one-third">
-								<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-								<select v-model="carModel" name="" id="" class="form-control" placeholder="Keyword search">
-									<option selected disabled value="">Select CarModel</option>
-									<option v-for="(type, index) in carModels" v-bind:key="index" :value="type.id">{{type.name}}</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
 							<input v-model="priceMin" type="number" class="form-control" placeholder="Price from">
 						</div>
 						<div class="form-group">
