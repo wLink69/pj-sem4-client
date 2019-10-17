@@ -29,7 +29,7 @@
 					<th scope="col">Date</th>
 					<th scope="col">Price($)</th>
 					<th scope="col">Status</th>
-					<!-- <th scope="col">Action</th> -->
+					<th scope="col">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,7 +43,9 @@
 						<td>{{order.price}}</td>
 						<td v-if="order.status == 0"><span style="color:red">Pending</span></td>
 						<td v-if="order.status == 2"><span style="color:#008a00">Done</span></td>
-						<!-- <td><a style="color: #007bff" href="#">Pay</a><span> / </span><a v-on:click="delOrder(order.id)" href="javascript:void(0)">Delete</a></td> -->
+						<td v-if="order.status == 2"><span style="color:#008a00">None</span></td>
+						<td v-if="order.status == 0 && !booking"><a style="color: #007bff" v-on:click="bookTour(order.id, order.price)" href="javascript:void(0)">Pay</a></td>
+						<td v-if="order.status == 0 && booking"><span style="color: #007bff">Waiting...</span></td>
 					</tr>
 				</tbody>
 				</table>
@@ -61,7 +63,7 @@
 					<th scope="col">Date</th>
 					<th scope="col">Price($)</th>
 					<th scope="col">Status</th>
-					<!-- <th scope="col">Action</th> -->
+					<th scope="col">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -74,7 +76,9 @@
 						<td>{{order.price}}</td>
 						<td v-if="order.status == 0"><span style="color:red">Pending</span></td>
 						<td v-if="order.status == 2"><span style="color:#008a00">Done</span></td>
-						<!-- <td><a style="color: #007bff" href="#">Pay</a><span> / </span><a v-on:click="delOrder(order.id)" href="javascript:void(0)">Delete</a></td> -->
+						<td v-if="order.status == 0 && !booking"><a style="color: #007bff" v-on:click="bookCar(order.id, order.price)" href="javascript:void(0)">Pay</a></td>
+						<td v-if="order.status == 2"><span style="color:#008a00">None</span></td>
+						<td v-if="order.status == 0 && booking"><span style="color: #007bff">Waiting...</span></td>
 					</tr>
 				</tbody>
 				</table>
@@ -167,9 +171,31 @@ export default {
 				email: '',
 				phone: ''
 			},
+			booking: false,
+			orderId: '',
+			orderToken: '',
+			redirect_url: '',
+			orderTour: {
+				tourId: '',
+				groupTypeId: 1,
+				season: 'Autumn'
+			},
+			orderCar: {
+				tourId: '',
+				season: 'Autumn'
+			},
+			config: {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: '',
+				}
+			},
 		}
 	},
 	created: function() {
+		if (this.token) {
+			location.href = "/";
+		}
 		var body = document.body; // For Safari
 		var html = document.documentElement; // Chrome, Firefox, IE and Opera 
 		body.scrollTop = 0; 
@@ -234,7 +260,73 @@ export default {
 		logout: function() {
 			document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 			location.href = "/";
+		},
+		bookTour: function(id, price) {
+			this.booking = 'tour';
+			this.config.headers.Authorization = 'Bearer ' + this.token;
+			this.orderTour.tourId = id;
+			axios.post(this.baseUrl + '/api/orderTour/create', JSON.stringify(this.orderTour), this.config)
+			.then((response) => {
+				this.orderId = response.data.data.id;
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+
+			axios.post(this.baseUrl + '/paypal/make/payment?sum=' + price, [], this.config)
+			.then((response) => {
+				this.redirect_url = response.data.redirect_url;
+				this.orderToken = response.data.redirect_url.split("&token=")[1];
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+		},
+		bookCar: function(id, price) {
+			this.booking='car';		
+			this.config.headers.Authorization = 'Bearer ' + this.token;
+			this.orderCar.carId = id;
+			axios.post(this.baseUrl + '/api/orderCar/create', JSON.stringify(this.orderCar), this.config)
+			.then((response) => {
+				this.orderId = response.data.data.id;
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+
+			axios.post(this.baseUrl + '/paypal/make/payment?sum=' + price, [], this.config)
+			.then((response) => {
+				this.redirect_url = response.data.redirect_url;
+				this.orderToken = response.data.redirect_url.split("&token=")[1];
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 		}
+	},
+	mounted() {
+		this.$watch(vm => [vm.orderId, vm.orderToken], val => {		
+			if (this.orderId != '' && this.orderToken != '') {
+				if (this.booking=='tour') {
+					axios.get(this.baseUrl + '/api/orderTour/edit/' + this.orderId + '?token=' + this.orderToken, this.config)
+					.then((response) => {
+						window.location.href = this.redirect_url;
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+				}
+				if (this.booking=='car') {
+					axios.get(this.baseUrl + '/api/orderCar/editToken/' + this.orderId + '?token=' + this.orderToken, this.config)
+					.then((response) => {
+						window.location.href = this.redirect_url;
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+				}
+			}
+		}, {immediate: true}) // run immediately
 	}
 }
 </script>

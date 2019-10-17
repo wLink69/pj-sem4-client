@@ -88,7 +88,7 @@
           				<div class="row">
 				            <div class="col-md-12">
 				              <div class="form-group">
-				                <input v-if="!booking" v-on:click="bookTour" type="button" value="Book Now" class="btn btn-primary py-3">
+				                <input v-if="!booking" v-on:click="bookCar" type="button" value="Book Now" class="btn btn-primary py-3">
 								<input v-if="booking" type="button" value="Please wait..." class="btn btn-primary py-3" disabled>
 				              </div>
 			              </div>
@@ -251,7 +251,7 @@ export default {
 		});
 	},
 	methods: {
-		bookTour: function() {
+		bookCar: function() {
 			this.booking=true;		
 			this.config.headers.Authorization = 'Bearer ' + this.token;
 			this.order.carId = parseInt(this.$route.params.id);
