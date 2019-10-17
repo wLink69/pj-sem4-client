@@ -15,7 +15,6 @@
 				<p>Last name: {{user.lastName}}</p>
 				<p>Email: {{user.email}}</p>
 				<p>Phone number: {{user.phoneNumber}}</p>
-				<a href="#" class="edit-pro">Edit Profile</a>
 			</div>
 			<div v-if="tab==2" class="mt-5 mb-5">
 				<h4 class="mb-3">My tour Order</h4>
@@ -108,9 +107,6 @@
 		p {
 			font-size: 16px;
 		}
-		.edit-pro {
-			font-size: 16px;
-		}
 	}
 	.log-out{
         float: right;
@@ -162,7 +158,15 @@ export default {
 					price: '',
 					date: ''
 				}
-			]
+			],
+			registerData: {
+				username: '',
+				password: '',
+				firstName: '',
+				lastName: '',
+				email: '',
+				phone: ''
+			},
 		}
 	},
 	created: function() {
