@@ -149,6 +149,7 @@ export default {
 					season: '',
 					status: '',
 					price: '',
+					token: '',
 					date: ''
 				}
 			],
@@ -160,6 +161,7 @@ export default {
 					season: '',
 					status: '',
 					price: '',
+					token: '',
 					date: ''
 				}
 			],
@@ -264,19 +266,19 @@ export default {
 		bookTour: function(id, price) {
 			this.booking = 'tour';
 			this.config.headers.Authorization = 'Bearer ' + this.token;
-			this.orderTour.tourId = id;
-			axios.post(this.baseUrl + '/api/orderTour/create', JSON.stringify(this.orderTour), this.config)
-			.then((response) => {
-				this.orderId = response.data.data.id;
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-
 			axios.post(this.baseUrl + '/paypal/make/payment?sum=' + price, [], this.config)
 			.then((response) => {
 				this.redirect_url = response.data.redirect_url;
 				this.orderToken = response.data.redirect_url.split("&token=")[1];
+				if (this.orderToken!='') {
+					axios.get(this.baseUrl + '/api/orderTour/edit/' + id + '?token=' + this.orderToken, this.config)
+					.then((response) => {
+						window.location.href = this.redirect_url;
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+				}
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -285,48 +287,24 @@ export default {
 		bookCar: function(id, price) {
 			this.booking='car';		
 			this.config.headers.Authorization = 'Bearer ' + this.token;
-			this.orderCar.carId = id;
-			axios.post(this.baseUrl + '/api/orderCar/create', JSON.stringify(this.orderCar), this.config)
-			.then((response) => {
-				this.orderId = response.data.data.id;
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-
 			axios.post(this.baseUrl + '/paypal/make/payment?sum=' + price, [], this.config)
 			.then((response) => {
 				this.redirect_url = response.data.redirect_url;
 				this.orderToken = response.data.redirect_url.split("&token=")[1];
+				if (this.orderToken!='') {
+					axios.get(this.baseUrl + '/api/orderCar/editToken/' + id + '?token=' + this.orderToken, this.config)
+					.then((response) => {
+						window.location.href = this.redirect_url;
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+				}		
 			})
 			.catch(function (error) {
 				console.log(error);
 			});
 		}
 	},
-	mounted() {
-		this.$watch(vm => [vm.orderId, vm.orderToken], val => {		
-			if (this.orderId != '' && this.orderToken != '') {
-				if (this.booking=='tour') {
-					axios.get(this.baseUrl + '/api/orderTour/edit/' + this.orderId + '?token=' + this.orderToken, this.config)
-					.then((response) => {
-						window.location.href = this.redirect_url;
-					})
-					.catch(function (error) {
-						console.log(error);
-					});
-				}
-				if (this.booking=='car') {
-					axios.get(this.baseUrl + '/api/orderCar/editToken/' + this.orderId + '?token=' + this.orderToken, this.config)
-					.then((response) => {
-						window.location.href = this.redirect_url;
-					})
-					.catch(function (error) {
-						console.log(error);
-					});
-				}
-			}
-		}, {immediate: true}) // run immediately
-	}
 }
 </script>
