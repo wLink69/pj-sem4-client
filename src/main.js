@@ -11,7 +11,7 @@ Vue.use(VueSweetalert2);
 Vue.mixin({
   data: function() {
     return {
-      baseUrl: 'http://06cd3edd.ngrok.io',
+      baseUrl: 'https://06cd3edd.ngrok.io',
       token: '',
     }
   },
