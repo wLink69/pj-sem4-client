@@ -335,6 +335,7 @@ export default {
           timer: 1500
         })
         document.getElementsByClassName('create-form')[0].reset();
+        this.tour.arrangements = '';
 			})
 			.catch((error) => {
         this.$swal.fire({
@@ -358,6 +359,7 @@ export default {
           timer: 1500
         })
         document.getElementsByClassName('create-form')[0].reset();
+        this.hotel.service = '';
 			})
 			.catch((error) => {
         this.$swal.fire({
@@ -381,6 +383,7 @@ export default {
           timer: 1500
         })
         document.getElementsByClassName('create-form')[0].reset();
+        this.flight.schedule = '';
 			})
 			.catch((error) => {
         this.$swal.fire({

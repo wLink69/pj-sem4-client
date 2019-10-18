@@ -33,7 +33,8 @@
 							<input v-model="priceMax" type="number" class="form-control" placeholder="Price to">
 						</div>
 						<div class="form-group">
-							<input v-on:click="doSearch" type="button" value="Search" class="btn btn-primary py-3 px-5">
+							<input v-if="!searching" v-on:click="doSearch" type="button" value="Search" class="btn btn-primary py-3 px-5">
+							<input v-if="searching" disabled type="button" value="Searching..." class="btn btn-primary py-3 px-5">
 						</div>
 						</div>
 					</form>
@@ -76,6 +77,7 @@
 				</div>
 				<div class="col-lg-9">
 					<div class="row">
+						<div v-if="notFound" style="font-size:18px"><b>Tour not found.</b></div>
 						<div v-for="(tour, index) in tours" v-bind:key="index" class="col-md-4 ftco-animate fadeInUp ftco-animated">
 							<div class="destination">
 								<a :href="'/tour/' + tour.id" class="img img-2 d-flex justify-content-center align-items-center" v-bind:style="'background-image: url(' + tour.image + ')'">
@@ -176,10 +178,13 @@ export default {
 			page: 0,
 			totalPages: '',
 			totalItems: '',
+			searching: false,
+			notFound: false,
 		}
 	},
 	methods: {
 		doSearch: function() {
+			this.searching = true;
 			var location = 'location=' + this.location; 
 			var title = 'title=' + this.title;
 			var priceMin;
@@ -191,6 +196,12 @@ export default {
 				this.tours = response.data.data;
 				this.totalPages = response.data.pagination.totalPages;
 				this.totalItems = response.data.pagination.totalItems;
+				if (response.data.data.length < 1) {
+					this.notFound = true;
+				} else {
+					this.notFound = false;
+				}
+				this.searching = false;
 			})
 			.catch(function (error) {
 				console.log(error);
