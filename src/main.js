@@ -5,23 +5,24 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 import VueSweetalert2 from 'vue-sweetalert2';
 
 Vue.config.productionTip = false;
-Vue.use( CKEditor );
+Vue.use(CKEditor);
 Vue.use(VueSweetalert2);
 
 Vue.mixin({
-  data: function() {
-    return {
-      baseUrl: 'https://06cd3edd.ngrok.io',
-      token: '',
+    data: function () {
+        return {
+            baseUrl: 'https://06cd3edd.ngrok.io',
+            token: '',
+        }
+    },
+    created: function () {
+        var match = document.cookie.match(new RegExp('(^| )' + 'token' + '=([^;]+)'));
+        if (match) this.token = match[2];
     }
-  },
-  created: function() {
-    var match = document.cookie.match(new RegExp('(^| )' + 'token' + '=([^;]+)'));
-    if (match) this.token = match[2];
-  }
 })
 
 new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+    router,
+    render: h = > h(App)
+}).
+$mount('#app')

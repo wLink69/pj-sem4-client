@@ -116,11 +116,11 @@
 						<div class="col text-center">
 							<div class="block-27">
 							<ul>
-								<li v-if="page > 0"><a href="javascript:void(0)">&lt;</a></li>
+								<li v-if="page > 0"><a v-on:click="page=page-1" href="javascript:void(0)">&lt;</a></li>
 								<li v-bind:class="{'active' : page==n-1}" v-for="n in totalPages" v-bind:key="n">
 									<a v-on:click="page=n-1" href="javascript:void(0)">{{n}}</a>
 								</li>
-								<li v-if="page < totalPages-1"><a href="javascript:void(0)">&gt;</a></li>
+								<li v-if="page < totalPages-1"><a v-on:click="page=page+1" href="javascript:void(0)">&gt;</a></li>
 							</ul>
 							</div>
 						</div>

@@ -24,115 +24,115 @@ import Edit from './views/admin/Edit.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/tour',
-      name: 'tour',
-      component: Tour
-    },
-    {
-      path: '/tour/:id',
-      name: 'tour-single',
-      component: TourSingle
-    },
-    {
-      path: '/hotel',
-      name: 'hotel',
-      component: Hotel
-    },
-    {
-      path: '/car',
-      name: 'car',
-      component: Car
-    },
-    {
-      path: '/car/:id',
-      name: 'car-single',
-      component: CarSingle
-    },
-    {
-      path: '/flight',
-      name: 'flight',
-      component: Flight
-    },
-    {
-      path: '/contact',
-      name: 'contact',
-      component: Contact
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register
-    },
-    {
-      path: '/account',
-      name: 'account',
-      component: Account
-    },
-    {
-      path: '/admin',
-      name: 'admin',
-      component: Admin,
-      children: [
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [
         {
-          path: 'dashboard',
-          component: Dashboard,
+            path: '/',
+            name: 'home',
+            component: Home
         },
         {
-          path: 'create',
-          component: Create,
+            path: '/tour',
+            name: 'tour',
+            component: Tour
         },
         {
-          path: 'create/:id',
-          component: Create,
+            path: '/tour/:id',
+            name: 'tour-single',
+            component: TourSingle
         },
         {
-          path: 'list',
-          component: List,
+            path: '/hotel',
+            name: 'hotel',
+            component: Hotel
         },
         {
-          path: 'list/:id',
-          component: List,
+            path: '/car',
+            name: 'car',
+            component: Car
         },
         {
-          path: 'edit/:id/:edit_id',
-          component: Edit,
+            path: '/car/:id',
+            name: 'car-single',
+            component: CarSingle
         },
         {
-          path: 'order',
-          component: Order,
+            path: '/flight',
+            name: 'flight',
+            component: Flight
         },
         {
-          path: 'order/:id',
-          component: Order,
+            path: '/contact',
+            name: 'contact',
+            component: Contact
         },
         {
-          path :'*',
-          component: NotFound
+            path: '/about',
+            name: 'about',
+            component: About
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: Register
+        },
+        {
+            path: '/account',
+            name: 'account',
+            component: Account
+        },
+        {
+            path: '/admin',
+            name: 'admin',
+            component: Admin,
+            children: [
+                {
+                    path: 'dashboard',
+                    component: Dashboard,
+                },
+                {
+                    path: 'create',
+                    component: Create,
+                },
+                {
+                    path: 'create/:id',
+                    component: Create,
+                },
+                {
+                    path: 'list',
+                    component: List,
+                },
+                {
+                    path: 'list/:id',
+                    component: List,
+                },
+                {
+                    path: 'edit/:id/:edit_id',
+                    component: Edit,
+                },
+                {
+                    path: 'order',
+                    component: Order,
+                },
+                {
+                    path: 'order/:id',
+                    component: Order,
+                },
+                {
+                    path: '*',
+                    component: NotFound
+                }
+            ]
+        },
+        {
+            path: '*',
+            component: NotFound
         }
-      ]
-    },
-    {
-      path :'*',
-      component: NotFound
-    }
-  ]
+    ]
 });
