@@ -28,7 +28,7 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label for="phone">Phone number</label>
-				<input v-model="registerData.phone" type="text" class="form-control" id="phone" placeholder="Enter phone">
+				<input v-model="registerData.phoneNumber" type="text" class="form-control" id="phone" placeholder="Enter phone">
 			</div>
 			<div class="form-group text-center col-md-12">
 				<input v-on:click="register" type="button" class="submit-btn btn btn-primary mt-2" value="Submit">
@@ -62,7 +62,7 @@ export default {
 				firstName: '',
 				lastName: '',
 				email: '',
-				phone: ''
+				phoneNumber: ''
 			},
 			errors: [],
 			config: {

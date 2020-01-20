@@ -11,7 +11,7 @@ Vue.use(VueSweetalert2);
 Vue.mixin({
     data: function () {
         return {
-            baseUrl: 'https://06cd3edd.ngrok.io',
+            baseUrl: 'https://wlink-98.herokuapp.com',
             token: '',
         }
     },
@@ -23,6 +23,5 @@ Vue.mixin({
 
 new Vue({
     router,
-    render: h = > h(App)
-}).
-$mount('#app')
+    render: h => h(App)
+}).$mount('#app')
